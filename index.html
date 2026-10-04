@@ -1137,6 +1137,7 @@
                 </a>
             </div>
 
+            <div id="katalogContainer"></div>
         </div>
         
         <div id="profilePage" class="page-content">
@@ -1256,16 +1257,24 @@
 
         setInterval(nextSlide, 3500);
 
-        setTimeout(() => {
-            const skeletons = document.querySelectorAll('.skel-card');
-            const realProducts = document.querySelectorAll('.real-product');
-            
-            skeletons.forEach(skel => skel.style.display = 'none');
-            realProducts.forEach((prod, index) => {
-                prod.style.display = 'flex';
-                prod.style.animation = `fadeUp 0.4s ease forwards ${index * 0.08}s`;
+        fetch('katalog.html')
+            .then(res => res.text())
+            .then(data => {
+                const catalogContainer = document.getElementById('katalogContainer');
+                if (catalogContainer) {
+                    catalogContainer.innerHTML = data;
+                }
+                setTimeout(() => {
+                    const skeletons = document.querySelectorAll('.skel-card');
+                    const realProducts = document.querySelectorAll('.real-product');
+                    
+                    skeletons.forEach(skel => skel.style.display = 'none');
+                    realProducts.forEach((prod, index) => {
+                        prod.style.display = 'flex';
+                        prod.style.animation = `fadeUp 0.4s ease forwards ${index * 0.08}s`;
+                    });
+                }, 1200);
             });
-        }, 1200);
 
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
@@ -1344,6 +1353,15 @@
             document.getElementById('toolModal').classList.remove('active');
         }
 
+        let lastTranslatedText = '';
+
+        function copyTranslatedText() {
+            if (lastTranslatedText) {
+                navigator.clipboard.writeText(lastTranslatedText);
+                alert('Teks berhasil disalin!');
+            }
+        }
+
         async function executeTool() {
             const btn = document.getElementById('modalActionBtn');
             const resultDiv = document.getElementById('modalResult');
@@ -1399,7 +1417,8 @@
                     let data = await res.json();
                     if (data && data[0]) {
                         let translated = data[0].map(item => item[0]).join('');
-                        resultDiv.innerHTML = `<div style="color:var(--text-primary); font-size:0.85rem; text-align:left; white-space:pre-wrap;">${translated}</div><button onclick="navigator.clipboard.writeText('${translated.replace(/'/g, "\\'")}'); alert('Teks berhasil disalin!');" class="result-btn" style="background:#5b50f6; color:#fff; border:none; cursor:pointer;"><i class="fa-solid fa-copy"></i> Salin Hasil</button>`;
+                        lastTranslatedText = translated;
+                        resultDiv.innerHTML = `<div style="color:var(--text-primary); font-size:0.85rem; text-align:left; white-space:pre-wrap;">${translated}</div><button onclick="copyTranslatedText()" class="result-btn" style="background:#5b50f6; color:#fff; border:none; cursor:pointer;"><i class="fa-solid fa-copy"></i> Salin Hasil</button>`;
                         resultDiv.style.display = 'flex';
                     } else {
                         alert('Gagal menerjemahkan teks!');
