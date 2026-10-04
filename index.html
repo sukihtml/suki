@@ -1025,29 +1025,6 @@
             font-size: 0.8rem;
             text-decoration: none;
         }
-        .visitor-counter {
-            position: fixed;
-            top: 14px;
-            right: 14px;
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 10px;
-            color: var(--text-secondary);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        .visitor-counter svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--text-secondary);
-        }
     </style>
 </head>
 <body>
@@ -1078,14 +1055,6 @@
     </div>
 
     <div class="bg-grid"></div>
-
-    <div class="visitor-counter">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-        </svg>
-        <span>Pengunjung: <span id="visit">...</span></span>
-    </div>
 
     <div class="app-container">
         <div id="homePage" class="page-content active">
@@ -1469,11 +1438,6 @@
             const waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
             window.open(waUrl, '_blank');
         }
-
-        fetch('https://api.counterapi.dev/v1/suki-store/visits/up')
-            .then(r => r.json())
-            .then(d => { document.getElementById('visit').innerText = d.count; })
-            .catch(e => {});
     </script>
 
 
