@@ -1,1 +1,486 @@
-.
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>suki-web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #F3F4F6;
+            color: #111827;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #FFFFFF;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 80px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #E5E7EB;
+            overflow: hidden;
+        }
+
+        .gallery-slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .gallery-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+
+        .gallery-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #FFFFFF;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 20px 16px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+            color: #D1D5DB;
+        }
+
+        .rating-score {
+            font-weight: 700;
+            font-size: 14px;
+            color: #111827;
+        }
+
+        .rating-reviews {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .rating-divider {
+            color: #D1D5DB;
+        }
+
+        .price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #EA580C;
+            letter-spacing: -0.5px;
+        }
+
+        .price-info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #6B7280;
+            border-bottom: 1px dashed #9CA3AF;
+            cursor: pointer;
+        }
+
+        .stats-grid {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 16px;
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stat-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            color: #64748B;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #0F172A;
+        }
+
+        .description-preview {
+            position: relative;
+            margin-top: 8px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .desc-text {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .desc-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1) 80%);
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .btn-show-more {
+            color: #2563EB;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .bottom-action-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background: #FFFFFF;
+            padding: 12px 16px;
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: flex-end;
+            z-index: 10;
+        }
+
+        .btn-buy {
+            background-color: #EA580C;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 32px;
+            font-size: 15px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-buy:active {
+            background-color: #C2410C;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .bottom-sheet {
+            position: fixed;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: #FFFFFF;
+            border-radius: 20px 20px 0 0;
+            z-index: 50;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+        }
+
+        .bottom-sheet.active {
+            bottom: 0;
+        }
+
+        .sheet-header {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .grabber {
+            width: 40px;
+            height: 4px;
+            background: #E2E8F0;
+            border-radius: 2px;
+            margin-bottom: 16px;
+        }
+
+        .sheet-title {
+            font-size: 16px;
+            font-weight: 700;
+            width: 100%;
+            text-align: left;
+        }
+
+        .btn-close {
+            position: absolute;
+            right: 16px;
+            top: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #64748B;
+            padding: 4px;
+        }
+
+        .sheet-content {
+            padding: 20px 16px;
+            overflow-y: auto;
+        }
+
+        .sheet-content p {
+            margin-bottom: 16px;
+        }
+
+        .sheet-content ul {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .sheet-content li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .sheet-content li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #94A3B8;
+        }
+
+        .floating-wa {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .floating-wa:hover,
+        .floating-wa:active {
+            opacity: 1;
+        }
+
+        .floating-wa img {
+            width: 45px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="gallery-container">
+            <div class="gallery-slider">
+                <img src="https://i.ibb.co.com/ymSTc9b7/20261006-183646.jpg" alt="Product Image 1">
+                <img src="https://i.ibb.co.com/VYysbZMn/20261006-183656.jpg" alt="Product Image 2">
+            </div>
+            <div class="gallery-badge">1/2</div>
+        </div>
+
+        <div class="product-info">
+            <h1 class="product-title">Starparks Mod Apk Unlock Svip by mirles</h1>
+            
+            <div class="rating-row">
+                <div class="stars">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <span class="rating-score">0.0</span>
+                <span class="rating-divider">|</span>
+                <span class="rating-reviews">0 ulasan</span>
+            </div>
+
+            <div class="price-section">
+                <div class="price">Rp 25.000</div>
+                <div class="price-info">
+                    Harga produk
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Terjual:</span>
+                    <span class="stat-value">tidak diketahui</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Respon:</span>
+                    <span class="stat-value">1 menit</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Minimal. beli:</span>
+                    <span class="stat-value">1</span>
+                </div>
+            </div>
+
+            <div class="description-section">
+                <h2 class="section-title">Deskripsi Produk</h2>
+                <div class="description-preview">
+                    <div class="desc-text">
+                        FITUR STARPARKS MOD : 1 APK RATUSAN GAME PC DAN BISA OFFLINE, RATUSAN GAME PC 100MB, TANPA HARUS DOWNLAOD GAMENYA, GTA 5 OFFLINE, NARUTO STORM CONNECTION OFFLINE, FORZA HORIZON 5 OFFLINE, HP KENTANG LANCAR, HEMAT BATRAI, HP ADEM GA GAMPANG PANAS
+                    </div>
+                    <div class="desc-fade">
+                        <button class="btn-show-more" onclick="toggleModal()">
+                            Tampilkan lebih banyak
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-action-bar">
+        <a href="https://saweria.co/CpJrCkB2k" class="btn-buy">Beli Langsung</a>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="toggleModal()"></div>
+    
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="sheet-header">
+            <div class="grabber"></div>
+            <h3 class="sheet-title">Deskripsi Produk</h3>
+            <button class="btn-close" onclick="toggleModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="sheet-content desc-text">
+            <p>FITUR STARPARKS MOD : 1 APK RATUSAN GAME PC DAN BISA OFFLINE, RATUSAN GAME PC 100MB, TANPA HARUS DOWNLAOD GAMENYA, GTA 5 OFFLINE, NARUTO STORM CONNECTION OFFLINE, FORZA HORIZON 5 OFFLINE, HP KENTANG LANCAR, HEMAT BATRAI, HP ADEM GA GAMPANG PANAS</p>
+        </div>
+    </div>
+
+    <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" class="floating-wa">
+        <img src="https://i.ibb.co.com/W4cY6wJ0/20261006-203347.png" alt="WhatsApp Channel">
+    </a>
+
+    <script>
+        function toggleModal() {
+            const overlay = document.getElementById('modalOverlay');
+            const sheet = document.getElementById('bottomSheet');
+            
+            if (overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+                sheet.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            } else {
+                overlay.classList.add('active');
+                sheet.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        const gallerySlider = document.querySelector('.gallery-slider');
+        const galleryBadge = document.querySelector('.gallery-badge');
+        if (gallerySlider && galleryBadge) {
+            gallerySlider.addEventListener('scroll', function() {
+                const index = Math.round(gallerySlider.scrollLeft / gallerySlider.clientWidth) + 1;
+                galleryBadge.textContent = index + '/2';
+            });
+        }
+    </script>
+</body>
+</html>
