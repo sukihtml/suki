@@ -72,8 +72,24 @@
     </div>
 </div>
 
-<section class="product-grid">
-    <div class="product-card real-product" style="display: flex; animation: 0.4s ease 0.08s 1 normal forwards running fadeUp;">
+<section class="product-grid" id="gameGrid">
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.08s 1 normal forwards running fadeUp;">
         <div class="product-img-wrapper">
             <img src="Profil game/Tictactoe pro.jpg" alt="Tictactoe pro">
         </div>
@@ -85,7 +101,7 @@
         </div>
     </div>
 
-    <div class="product-card real-product" style="display: flex; animation: 0.4s ease 0.16s 1 normal forwards running fadeUp;">
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.16s 1 normal forwards running fadeUp;">
         <div class="product-img-wrapper">
             <img src="Profil game/balap suki.jpg" alt="Balap suki">
         </div>
@@ -97,7 +113,7 @@
         </div>
     </div>
 
-    <div class="product-card real-product" style="display: flex; animation: 0.4s ease 0.24s 1 normal forwards running fadeUp;">
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.24s 1 normal forwards running fadeUp;">
         <div class="product-img-wrapper">
             <img src="Profil game/Suki plane 2.jpg" alt="Suki plane 2">
         </div>
@@ -113,10 +129,10 @@
 <script>
 window.addEventListener('load', function () {
     setTimeout(function () {
-        document.querySelectorAll('#productGrid .skel-card, #eventGrid .skel-card').forEach(function (el) {
+        document.querySelectorAll('#productGrid .skel-card, #eventGrid .skel-card, #gameGrid .skel-card').forEach(function (el) {
             el.style.display = 'none';
         });
-        document.querySelectorAll('#productGrid .real-product, #eventGrid .real-product').forEach(function (el) {
+        document.querySelectorAll('#productGrid .real-product, #eventGrid .real-product, #gameGrid .real-product').forEach(function (el) {
             el.style.display = 'flex';
         });
     }, 800);
