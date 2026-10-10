@@ -105,4 +105,60 @@
         <div class="product-img-wrapper">
             <img src="Profil game/balap suki.jpg" alt="Balap suki">
         </div>
-        <div class="product
+        <div class="product-info">
+            <h3 class="product-title">Balap suki</h3>
+            <div class="product-actions">
+                <a href="Game/Balap suki.html" class="btn-action-buy">Play</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.24s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img src="Profil game/Suki plane 2.jpg" alt="Suki plane 2">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">Suki plane 2</h3>
+            <div class="product-actions">
+                <a href="Game/Suki plane 2.html" class="btn-action-buy">Play</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.32s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img src="Profil game/pvp.png" alt="WG of Archer PVP">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">WG of Archer PVP</h3>
+            <div class="product-actions">
+                <a href="Game/wg of archer PVP.html" class="btn-action-buy">Play</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.4s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img src="Profil game/survival.png" alt="WG of Archer Survival">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">WG of Archer Survival</h3>
+            <div class="product-actions">
+                <a href="Game/wg of archer survival.html" class="btn-action-buy">Play</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+window.addEventListener('load', function () {
+    setTimeout(function () {
+        document.querySelectorAll('#productGrid .skel-card, #eventGrid .skel-card, #gameGrid .skel-card').forEach(function (el) {
+            el.style.display = 'none';
+        });
+        document.querySelectorAll('#productGrid .real-product, #eventGrid .real-product, #gameGrid .real-product').forEach(function (el) {
+            el.style.display = 'flex';
+        });
+    }, 800);
+});
+</script>
