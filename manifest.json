@@ -1,0 +1,23 @@
+{
+    "name": "A. Suki",
+    "short_name": "A. Suki",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#0f0f14",
+    "theme_color": "#0f0f14",
+    "icons": [
+        {
+            "src": "suki1.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "suki2.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
