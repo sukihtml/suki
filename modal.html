@@ -1,0 +1,404 @@
+<style>
+    .mx-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(5, 5, 7, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        overscroll-behavior: contain;
+    }
+
+    .mx-overlay.open {
+        display: flex;
+        animation: mxFade 0.35s ease both;
+    }
+
+    .mx-card {
+        width: 100%;
+        max-width: 360px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+        background: #131317;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65);
+    }
+
+    .mx-overlay.open .mx-card {
+        animation: mxRise 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+    }
+
+    .mx-media {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background: #0a0a0d;
+        overflow: hidden;
+    }
+
+    .mx-media video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mx-media::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 55%;
+        background: linear-gradient(to top, #131317 0%, rgba(19, 19, 23, 0) 100%);
+        pointer-events: none;
+    }
+
+    .mx-counter,
+    .mx-x {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 3;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mx-counter {
+        display: flex;
+        background: rgba(10, 10, 13, 0.55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .mx-counter svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+    }
+
+    .mx-ring-bg {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.16);
+        stroke-width: 2;
+    }
+
+    .mx-ring-fg {
+        fill: none;
+        stroke: #C5A059;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-dasharray: 100.53;
+        stroke-dashoffset: 0;
+    }
+
+    .mx-overlay.open .mx-ring-fg {
+        animation: mxRing 3s linear forwards;
+    }
+
+    .mx-num {
+        position: relative;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #F2EFE8;
+    }
+
+    .mx-x {
+        display: none;
+        padding: 0;
+        background: rgba(10, 10, 13, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #F2EFE8;
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .mx-x.show {
+        display: flex;
+        animation: mxPop 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+    }
+
+    .mx-x svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .mx-body {
+        position: relative;
+        z-index: 2;
+        padding: 0 20px 20px;
+        margin-top: -6px;
+    }
+
+    .mx-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: -0.2px;
+        color: #F2EFE8;
+    }
+
+    .mx-desc {
+        margin-top: 6px;
+        font-size: 0.78rem;
+        line-height: 1.55;
+        color: #9A978F;
+    }
+
+    .mx-actions {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .mx-actions.two {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mx-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 13px 14px;
+        border-radius: 16px;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+        transition: transform 0.15s ease;
+    }
+
+    .mx-btn:active {
+        transform: scale(0.97);
+    }
+
+    .mx-btn.stack {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .mx-btn svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+
+    .mx-btn-gold {
+        background: linear-gradient(180deg, #D2AE6A 0%, #BC9549 100%);
+        color: #1b1408;
+    }
+
+    .mx-btn-ghost {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #F2EFE8;
+    }
+
+    .mx-btn-label {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .mx-btn-sub {
+        margin-top: 2px;
+        font-size: 0.64rem;
+        font-weight: 500;
+        opacity: 0.7;
+    }
+
+    @keyframes mxFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes mxRise {
+        from { opacity: 0; transform: translateY(18px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes mxRing {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: 100.53; }
+    }
+
+    @keyframes mxPop {
+        from { opacity: 0; transform: scale(0.6); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .mx-overlay.open,
+        .mx-overlay.open .mx-card,
+        .mx-x.show {
+            animation: none;
+        }
+    }
+</style>
+
+<div class="mx-overlay" id="mxShare">
+    <div class="mx-card">
+        <div class="mx-media">
+            <video src="modal/modal%20share.mp4" muted loop playsinline preload="auto"></video>
+            <div class="mx-counter">
+                <svg viewBox="0 0 36 36" aria-hidden="true">
+                    <circle class="mx-ring-bg" cx="18" cy="18" r="16"></circle>
+                    <circle class="mx-ring-fg" cx="18" cy="18" r="16"></circle>
+                </svg>
+                <span class="mx-num">3</span>
+            </div>
+            <button class="mx-x" type="button" aria-label="Tutup">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="mx-body">
+            <div class="mx-title">Bagikan Suki Store</div>
+            <div class="mx-desc">Kirim aplikasinya ke teman lewat WhatsApp, link download langsung ikut terkirim.</div>
+            <div class="mx-actions">
+                <a class="mx-btn mx-btn-gold" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?text=Download%20Suki%20Store%20di%20sini%3A%0Ahttps%3A%2F%2Fwww.mediafire.com%2Ffile%2Fiwnvpu1h1z3gc7j%2FA.%2BSuki_1.apk%2Ffile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 4L9.5 14.5"></path>
+                        <path d="M21 4l-6.5 16-4-7.5L3 8.5 21 4z"></path>
+                    </svg>
+                    <span>Bagikan ke WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mx-overlay" id="mxArcher">
+    <div class="mx-card">
+        <div class="mx-media">
+            <video src="modal/modal%20wg%20of%20archer.mp4" muted loop playsinline preload="auto"></video>
+            <div class="mx-counter">
+                <svg viewBox="0 0 36 36" aria-hidden="true">
+                    <circle class="mx-ring-bg" cx="18" cy="18" r="16"></circle>
+                    <circle class="mx-ring-fg" cx="18" cy="18" r="16"></circle>
+                </svg>
+                <span class="mx-num">3</span>
+            </div>
+            <button class="mx-x" type="button" aria-label="Tutup">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="mx-body">
+            <div class="mx-title">Wg of Archer</div>
+            <div class="mx-desc">langsung main</div>
+            <div class="mx-actions two">
+                <a class="mx-btn mx-btn-gold stack" href="Game/wg%20of%20archer%20survival.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 3.5l7 2.8v5.3c0 4.2-2.8 7.5-7 8.9-4.2-1.4-7-4.7-7-8.9V6.3l7-2.8z"></path>
+                        <path d="M9.3 12l2 2 3.6-3.8"></path>
+                    </svg>
+                    <span class="mx-btn-label">
+                        <span>Mode Survival</span>
+                        <span class="mx-btn-sub">Bertahan</span>
+                    </span>
+                </a>
+                <a class="mx-btn mx-btn-ghost stack" href="Game/wg%20of%20archer%20PVP.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 19L19 5M13.5 5H19v5.5"></path>
+                        <path d="M19 19L5 5M10.5 5H5v5.5"></path>
+                    </svg>
+                    <span class="mx-btn-label">
+                        <span>Mode PvP</span>
+                        <span class="mx-btn-sub">PVP/PVB</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const startup = document.getElementById('startupDialogOverlay');
+
+        function startupHidden() {
+            return !startup || window.getComputedStyle(startup).display === 'none';
+        }
+
+        function waitStartup(callback) {
+            if (startupHidden()) {
+                callback();
+                return;
+            }
+            const poll = setInterval(() => {
+                if (startupHidden()) {
+                    clearInterval(poll);
+                    callback();
+                }
+            }, 400);
+        }
+
+        function openModal(id, next) {
+            const overlay = document.getElementById(id);
+            if (!overlay) {
+                next();
+                return;
+            }
+            const video = overlay.querySelector('video');
+            const counter = overlay.querySelector('.mx-counter');
+            const num = overlay.querySelector('.mx-num');
+            const closeBtn = overlay.querySelector('.mx-x');
+            let remaining = 3;
+
+            num.textContent = remaining;
+            video.muted = true;
+            overlay.classList.add('open');
+
+            const playing = video.play();
+            if (playing && playing.catch) {
+                playing.catch(() => {});
+            }
+
+            const timer = setInterval(() => {
+                remaining--;
+                if (remaining > 0) {
+                    num.textContent = remaining;
+                } else {
+                    clearInterval(timer);
+                    counter.style.display = 'none';
+                    closeBtn.classList.add('show');
+                }
+            }, 1000);
+
+            closeBtn.addEventListener('click', () => {
+                overlay.classList.remove('open');
+                video.pause();
+                setTimeout(next, 250);
+            });
+        }
+
+        function begin() {
+            waitStartup(() => {
+                openModal('mxShare', () => {
+                    openModal('mxArcher', () => {});
+                });
+            });
+        }
+
+        if (document.readyState === 'complete') {
+            begin();
+        } else {
+            window.addEventListener('load', begin);
+        }
+    })();
+</script>
