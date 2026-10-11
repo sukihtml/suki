@@ -1275,7 +1275,19 @@
                     });
                 }, 1200);
             });
-
+               fetch('modal.html')
+            .then(res => res.ok ? res.text() : '')
+            .then(data => {
+                const modalHost = document.createElement('div');
+                modalHost.innerHTML = data;
+                document.body.appendChild(modalHost);
+                modalHost.querySelectorAll('script').forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    newScript.textContent = oldScript.textContent;
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+            })
+            .catch(() => {});
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.real-product');
