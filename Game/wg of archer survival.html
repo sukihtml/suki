@@ -300,6 +300,96 @@ const AE=[
 ];
 const SKC=6,UD=2.8,GCD=10,GCH=.8,GFR=1.4;
 const evl=()=>S.length;
+const GRM=[1,2,4,7,12],GRK=['','f','c','a','z'];
+const GRN=[['','Zirah Perunggu','Zirah Perak','Zirah Gold','Zirah Obsidian'],['','Pedang Perunggu','Pedang Perak','Pedang Gold','Pedang Obsidian']];
+const GRP=[0,
+['#f0b87a','#b8733a','#6b3d17','#2e1a09','#ffd9a0'],
+['#ffffff','#c3cedc','#74829a','#2c3544','#9fd0ff'],
+['#fff3b0','#f2c94c','#a87810','#4d3504','#fff9d6'],
+['#7a6a9e','#2c2438','#0c0911','#000000','#b47bff']];
+const GQ={l:0,m:3.8,t:0};
+const gDm=()=>GRM[p.vt];
+function gearMk(k,t){
+const o=document.createElement('canvas');o.width=o.height=64;
+const x=o.getContext('2d'),m=GRP[t];
+const lg=(a,b,c,d)=>{const q=x.createLinearGradient(a,b,c,d);q.addColorStop(0,m[0]);q.addColorStop(.45,m[1]);q.addColorStop(1,m[2]);return q};
+x.lineJoin='round';x.lineCap='round';
+const rg=x.createRadialGradient(32,32,2,32,32,31);
+rg.addColorStop(0,m[4]);rg.addColorStop(1,m[4]+'00');
+x.globalAlpha=.22;x.fillStyle=rg;x.fillRect(0,0,64,64);x.globalAlpha=1;
+x.strokeStyle=m[3];x.lineWidth=1.8;
+if(k==0){
+for(const sd of[-1,1]){
+x.save();x.translate(32+sd*19,21);x.rotate(sd*.35);
+x.beginPath();x.ellipse(0,0,9.5,7,0,0,TAU);x.fillStyle=lg(-9,-7,9,7);x.fill();x.stroke();
+x.strokeStyle=m[2];x.lineWidth=1;x.beginPath();x.ellipse(0,0,6,4,0,0,TAU);x.stroke();
+x.restore();
+}
+x.beginPath();x.moveTo(19,13);x.quadraticCurveTo(32,8,45,13);x.lineTo(48,29);x.quadraticCurveTo(46,44,40,53);x.quadraticCurveTo(32,59,24,53);x.quadraticCurveTo(18,44,16,29);x.closePath();
+x.fillStyle=lg(16,10,48,58);x.fill();x.stroke();
+x.beginPath();x.moveTo(25,12.5);x.quadraticCurveTo(32,20,39,12.5);x.quadraticCurveTo(32,8.5,25,12.5);x.fillStyle=m[3];x.fill();
+x.strokeStyle=m[2];x.lineWidth=1.4;
+x.beginPath();x.moveTo(32,19);x.lineTo(32,32);x.stroke();
+x.beginPath();x.moveTo(20,29);x.quadraticCurveTo(32,37,44,29);x.stroke();
+x.beginPath();x.moveTo(22,45);x.quadraticCurveTo(32,50,42,45);x.stroke();
+x.globalAlpha=.26;x.fillStyle='#ffffff';
+x.beginPath();x.moveTo(21,16);x.quadraticCurveTo(26,14,30,15);x.lineTo(28,38);x.quadraticCurveTo(22,34,20,28);x.closePath();x.fill();
+x.globalAlpha=1;
+x.fillStyle=m[4];x.beginPath();x.moveTo(32,34);x.lineTo(35,38.5);x.lineTo(32,43);x.lineTo(29,38.5);x.closePath();x.fill();
+x.strokeStyle=m[3];x.lineWidth=1;x.stroke();
+}else{
+x.translate(32,32);x.rotate(PI/4);
+x.beginPath();x.moveTo(0,-30);x.lineTo(5,-22);x.lineTo(4.4,7);x.lineTo(-4.4,7);x.lineTo(-5,-22);x.closePath();
+x.fillStyle=lg(-5,0,5,0);x.fill();x.stroke();
+x.strokeStyle=m[2];x.lineWidth=1.3;x.beginPath();x.moveTo(0,-24);x.lineTo(0,3);x.stroke();
+x.strokeStyle=m[4];x.globalAlpha=.7;x.lineWidth=1;x.beginPath();x.moveTo(-3,-19);x.lineTo(-2.8,4);x.stroke();x.globalAlpha=1;
+x.fillStyle=t==4?'#17101f':'#2b1d12';x.fillRect(-2.4,9.5,4.8,12);
+x.strokeStyle=m[3];x.lineWidth=1.2;x.strokeRect(-2.4,9.5,4.8,12);
+x.strokeStyle=m[2];x.lineWidth=.9;
+for(let i=0;i<3;i++){x.beginPath();x.moveTo(-2.4,12.5+i*3.5);x.lineTo(2.4,14+i*3.5);x.stroke()}
+x.beginPath();x.moveTo(-13,5);x.quadraticCurveTo(0,2,13,5);x.lineTo(13,10);x.quadraticCurveTo(0,8,-13,10);x.closePath();
+x.fillStyle=lg(-13,0,13,0);x.fill();x.strokeStyle=m[3];x.lineWidth=1.6;x.stroke();
+x.beginPath();x.arc(0,25,3.6,0,TAU);x.fillStyle=lg(-3,22,3,28);x.fill();x.stroke();
+x.fillStyle=m[4];x.beginPath();x.arc(0,7.2,1.8,0,TAU);x.fill();
+}
+return o;
+}
+const GRC=[[0],[0]];
+for(let t=1;t<=4;t++){GRC[0][t]=gearMk(0,t);GRC[1][t]=gearMk(1,t)}
+function gearUp(t){
+p.mh=100*GRM[t];p.hp=p.mh;GQ.t=t;GQ.l=GQ.m;
+}
+function gearHud(x,y,w){
+const t=p.vt;
+if(t<1)return;
+g.save();
+g.textAlign='center';g.font='600 9px system-ui,sans-serif';
+for(let i=0;i<2;i++){
+const bx=x+w+34+i*46,by=y+12;
+g.fillStyle='rgba(8,10,16,.55)';g.fillRect(bx-1,by-1,24,24);
+g.strokeStyle='rgba(232,223,204,.3)';g.lineWidth=1;g.strokeRect(bx-.5,by-.5,23,23);
+g.drawImage(GRC[i][t],bx,by,22,22);
+g.fillStyle='rgba(228,234,248,.85)';
+g.fillText((i?'DMG x':'HP x')+GRM[t],bx+11,by+33);
+}
+g.restore();
+}
+function gearPop(){
+if(GQ.l<=0)return;
+const t=GQ.t,k=M.max(0,M.min(1,GQ.l*2,(GQ.m-GQ.l)*4)),pp=1+.3*M.max(0,1-(GQ.m-GQ.l)*3);
+g.save();g.textAlign='center';
+for(let i=0;i<2;i++){
+const cx=VW/2+(i?84:-84),cy=142,sz=56*pp;
+gl(GRK[t],cx,cy,64,k*.5);
+g.globalAlpha=k;
+g.fillStyle='rgba(8,10,16,.6)';g.fillRect(cx-36,cy-36,72,72);
+g.strokeStyle='rgba(232,223,204,.35)';g.lineWidth=1;g.strokeRect(cx-35.5,cy-35.5,71,71);
+g.drawImage(GRC[i][t],cx-sz/2,cy-sz/2,sz,sz);
+g.font='600 12px system-ui,sans-serif';g.fillStyle='#e8dfcc';g.fillText(GRN[i][t],cx,cy+54);
+g.font='11px system-ui,sans-serif';g.fillStyle='rgba(232,223,204,.75)';g.fillText((i?'Damage x':'HP x')+GRM[t],cx,cy+69);
+}
+g.restore();
+}
 
 function aim(d,s,x0,y0,def){
 let b=null,bd=1e9;
@@ -319,7 +409,7 @@ return M.max(-.62,M.min(.5,a));
 
 function fire(){
 const c=M.max(.18,p.ch),s=480+c*760,d=p.f,a=aim(d,s,p.x+d*26,p.y-45,-.07-(1-c)*.04),ev=evl(),e=AE[ev];
-A.push({x:p.x+d*26,y:p.y-45,vx:d*M.cos(a)*s,vy:M.sin(a)*s,tr:[],st:0,l:0,c,an:d>0?a:PI-a,dm:(16+c*44)*e.d,pr:(c>.85?2:0)+e.pr,hit:[],ev});
+A.push({x:p.x+d*26,y:p.y-45,vx:d*M.cos(a)*s,vy:M.sin(a)*s,tr:[],st:0,l:0,c,an:d>0?a:PI-a,dm:(16+c*44)*e.d*gDm(),pr:(c>.85?2:0)+e.pr,hit:[],ev});
 p.dr=0;p.ch=0;p.pc=0;p.cd=.2;p.rc=1;shake=M.max(shake,1+c*3);
 for(let i=0;i<8;i++){const b=rnd(-.5,.5);sp(3,p.x+d*28,p.y-45,d*M.cos(b)*rnd(120,360)*c+d*60,M.sin(b)*rnd(120,300)*c,rnd(.2,.4),2,e.c,500,2)}
 ring(p.x+d*30,p.y-45,e.c,22+c*22);
@@ -332,7 +422,7 @@ const d=p.f,ev=evl(),e=AE[ev],ba=aim(d,1000,p.x+d*26,p.y-45,-.09);
 p.kc=SKC;p.dr=0;p.ch=0;p.pc=0;p.cd=.25;p.rc=1;shake=M.max(shake,3);
 for(let i=-2;i<=2;i++){
 const a=ba+i*.1;
-A.push({x:p.x+d*26,y:p.y-45,vx:d*M.cos(a)*1000,vy:M.sin(a)*1000,tr:[],st:0,l:0,c:.85,an:d>0?a:PI-a,dm:30*e.d,pr:1+e.pr,hit:[],ev});
+A.push({x:p.x+d*26,y:p.y-45,vx:d*M.cos(a)*1000,vy:M.sin(a)*1000,tr:[],st:0,l:0,c:.85,an:d>0?a:PI-a,dm:30*e.d*gDm(),pr:1+e.pr,hit:[],ev});
 }
 for(let i=0;i<10;i++){const b=rnd(-.6,.6);sp(3,p.x+d*28,p.y-45,d*M.cos(b)*rnd(160,420)+d*60,M.sin(b)*rnd(160,340),rnd(.2,.4),2,e.c,500,2)}
 ring(p.x+d*30,p.y-45,e.c,34);
@@ -360,7 +450,7 @@ p.ut-=dt;p.us-=dt;
 while(p.us<=0){
 p.us+=.03;
 const ev=evl();
-A.push({x:rnd(cam-30,cam+VW+30),y:rnd(-160,-40),vx:rnd(-40,40),vy:rnd(650,900),tr:[],st:0,l:0,c:.75,an:PI/2,dm:46*AE[ev].d,pr:AE[ev].pr,hit:[],ev,ul:1});
+A.push({x:rnd(cam-30,cam+VW+30),y:rnd(-160,-40),vx:rnd(-40,40),vy:rnd(650,900),tr:[],st:0,l:0,c:.75,an:PI/2,dm:46*AE[ev].d*gDm(),pr:AE[ev].pr,hit:[],ev,ul:1});
 if(ev==4&&M.random()<.55)A.push({x:rnd(cam-30,cam+VW+30),y:rnd(-220,-40),vx:rnd(-60,60),vy:rnd(700,980),tr:[],st:0,l:0,c:.8,an:PI/2,dm:0,pr:0,hit:[],ev,ul:1,vf:1});
 }
 if(evl()==4)uSt(dt);
@@ -378,7 +468,7 @@ ring(p.x+p.f*28,p.y-47,'150,80,255',30);
 ban('Gelombang Elektrik');
 }
 function gwHit(){
-const d=p.gd,ox=p.x+d*28,oy=p.y-47,f=gwF(),L=f[0],R=30*f[1],dm=16*AE[evl()].d;
+const d=p.gd,ox=p.x+d*28,oy=p.y-47,f=gwF(),L=f[0],R=30*f[1],dm=16*AE[evl()].d*gDm();
 if(R<4)return;
 for(let i=0;i<4;i++){const x=ox+d*rnd(0,L);sp(3,x,oy+rnd(-R,R),rnd(-70,70),rnd(-200,-50),rnd(.3,.6),1.8,'200,150,255',500,2)}
 for(const e of E){
@@ -913,7 +1003,7 @@ for(let i=0;i<2;i++){const a=t*10+i*PI,r=64-t*24;sp(1,p.x+M.cos(a)*r,GY-2-t/1.7*
 shake=M.max(shake,t*1.6);
 }
 if(t>=1.7&&!EV.fl){
-EV.fl=1;p.vt=EV.to;
+EV.fl=1;p.vt=EV.to;gearUp(EV.to);
 shake=18;FXA.fl=1;FXA.fc=e.c;
 ring(p.x,y,e.c,340);ring(p.x,y,e.c,260);ring(p.x,y,e.c,170);ring(p.x,y,'255,255,255',110);
 sp(1,p.x,y,0,0,.7,320,e.k);
@@ -1635,7 +1725,7 @@ if(q.l>1.5)Pr.splice(i,1);
 }
 }
 function upH(dt){
-p.inv-=dt;p.hu-=dt;p.rg-=dt;
+p.inv-=dt;p.hu-=dt;p.rg-=dt;GQ.l=M.max(0,GQ.l-dt);
 FXA.fl=M.max(0,FXA.fl-dt*1.6);FXA.sa=M.max(0,FXA.sa-dt);
 if(p.dead){p.dead+=dt;if(p.dead>3.2)rez()}
 else if(p.rg<=0&&p.hp<p.mh)p.hp=M.min(p.mh,p.hp+2*dt);
@@ -2419,6 +2509,7 @@ g.fillText(p.go>0?'R  Gelombang Elektrik aktif':p.gc>0?'R  Gelombang Elektrik  '
 g.fillStyle='rgba(8,10,16,.55)';g.fillRect(x,ys+48,92,4);
 g.fillStyle='#a06bff';g.fillRect(x+.5,ys+48.5,91*vr,3);
 }
+gearHud(x,y,w);gearPop();
 const b=E.find(e=>e.boss&&!e.dd);
 if(b){
 const bw=M.min(380,VW-224),bx=M.max(210,(VW-bw)/2),br=M.max(0,b.hp/b.mh);
