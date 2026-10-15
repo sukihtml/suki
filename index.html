@@ -6,7 +6,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Teko:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Teko:wght@600;700&amp;family=Syne:wght@800&amp;family=Outfit:wght@600&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -214,10 +214,31 @@
 
         .header {
             padding: 14px 14px 6px;
-            position: sticky;
+            position: relative;
             top: 0;
             z-index: 10;
-            background: linear-gradient(to bottom, rgba(6,6,8,0.98) 70%, rgba(6,6,8,0));
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: none;
+            padding: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-btn svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+        }
+
+        .search-section {
+            padding: 6px 14px;
         }
 
         .search-bar {
@@ -1025,6 +1046,142 @@
             font-size: 0.8rem;
             text-decoration: none;
         }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 440px;
+            height: 100%;
+            z-index: 1000;
+            overflow: hidden;
+            visibility: hidden;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.35s ease, visibility 0.35s;
+        }
+
+        .menu-overlay.active {
+            visibility: visible;
+            background: rgba(0, 0, 0, 0.78);
+        }
+
+        .menu-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .menu-drawer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 100%;
+            background: #0b0b0f;
+            --u: calc(min(100vw, 440px) / 412);
+            transform: translateX(-100%);
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .menu-overlay.active .menu-drawer {
+            transform: translateX(0);
+        }
+
+        .menu-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .menu-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .menu-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .menu-inner {
+            position: relative;
+            height: 100%;
+            overflow-y: auto;
+            padding: calc(var(--u) * 46) 7% 30px;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--u) * 18);
+        }
+
+        .menu-title {
+            font-family: 'Syne', sans-serif;
+            font-size: calc(var(--u) * 30);
+            font-weight: 800;
+            color: #ffffff;
+            text-align: center;
+            letter-spacing: calc(var(--u) * 2);
+            line-height: 1;
+            margin-bottom: calc(var(--u) * 14);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--u) * 20);
+            height: calc(var(--u) * 60);
+            padding: 0 calc(var(--u) * 24);
+            border-radius: calc(var(--u) * 14);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: #ffffff;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .menu-item i {
+            width: calc(var(--u) * 20);
+            text-align: center;
+            font-size: calc(var(--u) * 18);
+        }
+
+        .menu-item span {
+            font-family: 'Outfit', sans-serif;
+            font-size: calc(var(--u) * 16);
+            font-weight: 600;
+        }
+
+        .menu-close-tab {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: calc(var(--u) * 40);
+            height: calc(var(--u) * 77);
+            background: #e20000;
+            clip-path: polygon(0 0, 100% 21%, 100% 79%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: calc(var(--u) * 13);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -1060,10 +1217,13 @@
         <div id="homePage" class="page-content active">
             
             <header class="header">
-                <div class="search-bar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari layanan / produk..." class="">
-                </div>
+                <button class="menu-btn" onclick="openMenu()" aria-label="Menu">
+                    <svg viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="4" width="20" height="2.6" rx="0.6"></rect>
+                        <rect x="12" y="10.7" width="10" height="2.6" rx="0.6"></rect>
+                        <rect x="2" y="17.4" width="20" height="2.6" rx="0.6"></rect>
+                    </svg>
+                </button>
             </header>
 
             <section class="carousel-section">
@@ -1124,17 +1284,24 @@
                 <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" target="_blank" class="action-card card-saluran">
                     <i class="fa-brands fa-whatsapp action-icon"></i>
                     <div class="action-text">
-                        <span class="action-title">Saluran WA</span>
+                        <span class="action-title">Saluran Suki</span>
                         <span class="action-sub">Wajib Follow</span>
                     </div>
                 </a>
-                <a href="https://t.me/suki7111" target="_blank" class="action-card card-admin">
-                    <i class="fa-solid fa-headset action-icon"></i>
+                <a href="https://whatsapp.com/channel/0029Vauyr9L9Bb63SdcDJB3n" target="_blank" class="action-card card-saluran">
+                    <i class="fa-brands fa-whatsapp action-icon"></i>
                     <div class="action-text">
-                        <span class="action-title">Chat Admin</span>
-                        <span class="action-sub">Bantuan &amp; Beli</span>
+                        <span class="action-title">Saluran WG</span>
+                        <span class="action-sub">Wajib Follow</span>
                     </div>
                 </a>
+            </div>
+
+            <div class="search-section">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari layanan / produk..." class="">
+                </div>
             </div>
 
             <div id="katalogContainer"></div>
@@ -1214,6 +1381,45 @@
             <span>Profil</span>
         </a>
     </nav>
+
+    <div id="menuOverlay" class="menu-overlay">
+        <div class="menu-backdrop" onclick="closeMenu()"></div>
+        <div class="menu-drawer">
+            <div class="menu-bg">
+                <video class="menu-video" autoplay muted loop playsinline></video>
+            </div>
+            <div class="menu-inner">
+                <div class="menu-title">MENU</div>
+                <a href="#" class="menu-item" onclick="shareApi(event)">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>Share Aplikasi</span>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vauyr9L9Bb63SdcDJB3n" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Saluran WG</span>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Saluran Suki</span>
+                </a>
+                <a href="https://sukiwgsuki" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YT Suki</span>
+                </a>
+                <a href="https://sukiwgsuki" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YT WG</span>
+                </a>
+                <a href="https://sukiwgsuki" target="_blank" class="menu-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Grup WGxSuki</span>
+                </a>
+            </div>
+            <div class="menu-close-tab" onclick="closeMenu()">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1446,9 +1652,17 @@
 
         function shareApi(e) {
             if (e) e.preventDefault();
-            const shareText = window.location.href + "\n\nweb Suki store, nokos free, bug wangsaf free, logo free, dll";
+            const shareText = "Apk gw, semuanya ada di sini:\nNokos gratis\nApk gratis\nBot wa gratis\nhttps://www.mediafire.com/file/iwnvpu1h1z3gc7j/A.+Suki_1.apk/file";
             const waUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
             window.open(waUrl, '_blank');
+        }
+
+        function openMenu() {
+            document.getElementById('menuOverlay').classList.add('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('menuOverlay').classList.remove('active');
         }
     </script>
 
