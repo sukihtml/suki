@@ -1226,6 +1226,105 @@
         .menu-drawer.content-hidden .menu-eye-btn .eye-closed {
             display: none;
         }
+
+        .visitor-badge {
+            margin-right: auto;
+            align-self: center;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-gold);
+        }
+
+        .visitor-badge svg {
+            width: 15px;
+            height: 15px;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .visitor-badge .visitor-num {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .visitor-badge .visitor-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .marquee-section {
+            padding: 6px 14px;
+        }
+
+        .marquee-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 12px;
+            background: rgba(197, 160, 89, 0.08);
+            border: 1px solid var(--border-gold);
+            overflow: hidden;
+        }
+
+        .marquee-icon {
+            width: 18px;
+            height: 18px;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .marquee-viewport {
+            flex: 1;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 14s linear infinite;
+        }
+
+        .marquee-group {
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            color: var(--accent-gold-light);
+        }
+
+        .marquee-item::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            margin: 0 24px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            opacity: 0.7;
+        }
+
+        @keyframes marqueeScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body>
@@ -1261,6 +1360,14 @@
         <div id="homePage" class="page-content active">
             
             <header class="header">
+                <div class="visitor-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <span class="visitor-num" id="visitorCount">625</span>
+                    <span class="visitor-label">pengunjung</span>
+                </div>
                 <button class="menu-btn" onclick="openMenu()" aria-label="Menu">
                     <svg viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2" y="4" width="20" height="2.6" rx="0.6"></rect>
@@ -1284,6 +1391,27 @@
                         </div>
                         <div class="carousel-slide">
                             <img src="Profil admin/Banner1.jpg" alt="Promo 1">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="marquee-section">
+                <div class="marquee-wrapper">
+                    <svg class="marquee-icon" viewBox="0 0 24 24" fill="none" stroke="#E5C178" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                    <div class="marquee-viewport">
+                        <div class="marquee-track">
+                            <div class="marquee-group">
+                                <span class="marquee-item">100% amanah terpercaya dan boleh nego</span>
+                                <span class="marquee-item">100% amanah terpercaya dan boleh nego</span>
+                            </div>
+                            <div class="marquee-group" aria-hidden="true">
+                                <span class="marquee-item">100% amanah terpercaya dan boleh nego</span>
+                                <span class="marquee-item">100% amanah terpercaya dan boleh nego</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1516,6 +1644,75 @@
         }
 
         setInterval(nextSlide, 3500);
+
+        const visitorMilestones = [
+            [9, 16, 625],
+            [9, 18, 821],
+            [9, 22, 1284],
+            [9, 28, 1973],
+            [10, 2, 2101],
+            [10, 6, 2401],
+            [10, 12, 3256],
+            [10, 18, 3515],
+            [10, 26, 3899],
+            [11, 1, 4241]
+        ].map(([m, d, v]) => [Date.UTC(2026, m, d) - 7 * 3600 * 1000, v]);
+
+        function getVisitorCount() {
+            const now = Date.now();
+            const last = visitorMilestones.length - 1;
+            if (now <= visitorMilestones[0][0]) return visitorMilestones[0][1];
+            if (now >= visitorMilestones[last][0]) return visitorMilestones[last][1];
+            for (let i = 1; i <= last; i++) {
+                if (now <= visitorMilestones[i][0]) {
+                    const [t0, v0] = visitorMilestones[i - 1];
+                    const [t1, v1] = visitorMilestones[i];
+                    return Math.floor(v0 + (v1 - v0) * (now - t0) / (t1 - t0));
+                }
+            }
+            return visitorMilestones[last][1];
+        }
+
+        const visitorEl = document.getElementById('visitorCount');
+        let visitorCurrent = getVisitorCount();
+
+        function saveVisitor() {
+            try { localStorage.setItem('visitorCount', String(visitorCurrent)); } catch (e) {}
+        }
+
+        function animateVisitor(from, to) {
+            const start = performance.now();
+            const dur = 800;
+            function step(t) {
+                const p = Math.min((t - start) / dur, 1);
+                visitorEl.textContent = Math.round(from + (to - from) * p).toLocaleString('id-ID');
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        function updateVisitor() {
+            const target = getVisitorCount();
+            if (target !== visitorCurrent) {
+                animateVisitor(visitorCurrent, target);
+                visitorCurrent = target;
+                saveVisitor();
+            }
+        }
+
+        (function initVisitor() {
+            const target = visitorCurrent;
+            let stored = NaN;
+            try { stored = parseInt(localStorage.getItem('visitorCount'), 10); } catch (e) {}
+            if (!isNaN(stored) && stored < target) {
+                visitorEl.textContent = stored.toLocaleString('id-ID');
+                animateVisitor(stored, target);
+            } else {
+                visitorEl.textContent = target.toLocaleString('id-ID');
+            }
+            saveVisitor();
+            setInterval(updateVisitor, 30000);
+        })();
 
         fetch('katalog.html')
             .then(res => res.text())
