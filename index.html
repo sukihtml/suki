@@ -458,7 +458,7 @@
             font-size: 1.1rem;
         }
 
-        .card-saluran .action-icon { color: #30D158; }
+        .card-saluran .action-icon { color: #ffffff; }
         .card-admin .action-icon { color: #0A84FF; }
 
         .action-text {
@@ -1115,6 +1115,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            opacity: 0.6;
         }
 
         .menu-inner {
@@ -1253,7 +1254,7 @@
                         </div>
                         <div class="mini-profile-info">
                             <div class="mini-profile-name">
-                                 Suki <i class="fa-solid fa-circle-check" style="color: #32D74B; font-size: 0.75rem;"></i>
+                                 Suki <i class="fa-solid fa-circle-check" style="color: #ffffff; font-size: 0.75rem;"></i>
                             </div>
                             <div class="mini-profile-desc"></div>
                         </div>
@@ -1386,7 +1387,7 @@
         <div class="menu-backdrop" onclick="closeMenu()"></div>
         <div class="menu-drawer">
             <div class="menu-bg">
-                <video class="menu-video" autoplay muted loop playsinline></video>
+                <video class="menu-video" src="menu/menu.mp4" loop playsinline></video>
             </div>
             <div class="menu-inner">
                 <div class="menu-title">MENU</div>
@@ -1659,10 +1660,14 @@
 
         function openMenu() {
             document.getElementById('menuOverlay').classList.add('active');
+            const menuVideo = document.querySelector('.menu-video');
+            if (menuVideo) menuVideo.play().catch(() => {});
         }
 
         function closeMenu() {
             document.getElementById('menuOverlay').classList.remove('active');
+            const menuVideo = document.querySelector('.menu-video');
+            if (menuVideo) menuVideo.pause();
         }
     </script>
 
