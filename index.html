@@ -1325,6 +1325,28 @@
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
         }
+
+        html, body, body * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            -webkit-touch-callout: default;
+        }
+
+        img, video, svg {
+            -webkit-user-drag: none;
+            user-drag: none;
+            -webkit-touch-callout: none;
+        }
     </style>
 </head>
 <body>
@@ -1417,57 +1439,7 @@
                 </div>
             </section>
 
-            <div class="info-profile-section">
-                <div class="info-profile-wrapper">
-                    <div class="mini-profile">
-                        <div class="mini-profile-img-container">
-                            <img src="Profil admin/Profil Suki.jpg" alt="Profile" class="mini-profile-img">
-                        </div>
-                        <div class="mini-profile-info">
-                            <div class="mini-profile-name">
-                                 Suki <i class="fa-solid fa-circle-check" style="color: #ffffff; font-size: 0.75rem;"></i>
-                            </div>
-                            <div class="mini-profile-desc"></div>
-                        </div>
-                        <a href="https://wa.me/62" class="btn-report">Support</a>
-                    </div>
-
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <i class="fa-solid fa-code info-card-icon"></i>
-                            <div class="info-card-label">Web-Dev</div>
-                            <div class="info-card-value">Suki</div>
-                        </div>
-                        <div class="info-card">
-                            <i class="fa-solid fa-store info-card-icon"></i>
-                            <div class="info-card-label">Toko</div>
-                            <div class="info-card-value">Suki-dev</div>
-                        </div>
-                        <div class="info-card">
-                            <i class="fa-solid fa-wallet info-card-icon"></i>
-                            <div class="info-card-label">Payment</div>
-                            <div class="info-card-value">E-Wallet</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="action-cards">
-                <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" target="_blank" class="action-card card-saluran">
-                    <i class="fa-brands fa-whatsapp action-icon"></i>
-                    <div class="action-text">
-                        <span class="action-title">Saluran Suki</span>
-                        <span class="action-sub">Wajib Follow</span>
-                    </div>
-                </a>
-                <a href="https://whatsapp.com/channel/0029Vauyr9L9Bb63SdcDJB3n" target="_blank" class="action-card card-saluran">
-                    <i class="fa-brands fa-whatsapp action-icon"></i>
-                    <div class="action-text">
-                        <span class="action-title">Saluran WG</span>
-                        <span class="action-sub">Wajib Follow</span>
-                    </div>
-                </a>
-            </div>
+            <div id="cardContainer"></div>
 
             <div class="search-section">
                 <div class="search-bar">
@@ -1480,39 +1452,6 @@
         </div>
         
         <div id="profilePage" class="page-content">
-            <div class="tools-grid" style="margin-top: 14px;">
-                <div onclick="openTool('yt')" class="tool-card">
-                    <div class="tool-icon-wrapper">
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                    <span class="tool-title">YouTube Downloader</span>
-                    <span class="tool-desc">Download video/audio</span>
-                </div>
-                
-                <div onclick="openTool('tt')" class="tool-card">
-                    <div class="tool-icon-wrapper">
-                        <i class="fa-brands fa-tiktok"></i>
-                    </div>
-                    <span class="tool-title">TikTok Downloader</span>
-                    <span class="tool-desc">Tanpa watermark</span>
-                </div>
-                
-                <div onclick="openTool('deepl')" class="tool-card">
-                    <div class="tool-icon-wrapper">
-                        <i class="fa-solid fa-language"></i>
-                    </div>
-                    <span class="tool-title">Terjemahan</span>
-                    <span class="tool-desc">Anti kaku & akurat</span>
-                </div>
-                
-                <div onclick="shareApi(event)" class="tool-card">
-                    <div class="tool-icon-wrapper">
-                        <i class="fa-solid fa-share-nodes"></i>
-                    </div>
-                    <span class="tool-title">Share Web Gw</span>
-                    <span class="tool-desc">Bagikan fitur ini</span>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1555,52 +1494,6 @@
     </nav>
 
     <div id="menuOverlay" class="menu-overlay">
-        <div class="menu-backdrop" onclick="closeMenu()"></div>
-        <div class="menu-drawer">
-            <div class="menu-bg">
-                <video class="menu-video" src="menu/menu.mp4" loop playsinline></video>
-            </div>
-            <div class="menu-inner">
-                <div class="menu-title">MENU</div>
-                <a href="#" class="menu-item" onclick="shareApi(event)">
-                    <i class="fa-solid fa-share-nodes"></i>
-                    <span>Share Aplikasi</span>
-                </a>
-                <a href="https://whatsapp.com/channel/0029Vauyr9L9Bb63SdcDJB3n" target="_blank" class="menu-item">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <span>Saluran WG</span>
-                </a>
-                <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" target="_blank" class="menu-item">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <span>Saluran Suki</span>
-                </a>
-                <a href="https://youtu.be/rtS59k01c4g?si=-ZI00j-8yuV6yq9C" target="_blank" class="menu-item">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span>YT Suki</span>
-                </a>
-                <a href="https://youtu.be/xq3DUQa4JTs?si=m1kydhQhpxy_0R-2" target="_blank" class="menu-item">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span>YT WG</span>
-                </a>
-                <a href="https://chat.whatsapp.com/FuFQiA93jgqLfvvtzj7YV0?s=cl&p=a&mlu=4&ilr=4" target="_blank" class="menu-item">
-                    <i class="fa-solid fa-users"></i>
-                    <span>Grup WGxSuki</span>
-                </a>
-            </div>
-            <button class="menu-eye-btn" onclick="toggleMenuContent()" aria-label="Sembunyikan / tampilkan menu">
-                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                </svg>
-                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-            </button>
-            <div class="menu-close-tab" onclick="closeMenu()">
-                <i class="fa-solid fa-chevron-left"></i>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -1745,6 +1638,28 @@
                 });
             })
             .catch(() => {});
+
+        fetch('card.html')
+            .then(res => res.ok ? res.text() : '')
+            .then(data => {
+                document.getElementById('cardContainer').innerHTML = data;
+            })
+            .catch(() => {});
+
+        fetch('profil.html')
+            .then(res => res.ok ? res.text() : '')
+            .then(data => {
+                document.getElementById('profilePage').innerHTML = data;
+            })
+            .catch(() => {});
+
+        fetch('menu.html')
+            .then(res => res.ok ? res.text() : '')
+            .then(data => {
+                document.getElementById('menuOverlay').innerHTML = data;
+            })
+            .catch(() => {});
+
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.real-product');
@@ -1923,6 +1838,18 @@
             const menuVideo = document.querySelector('.menu-video');
             if (menuVideo) menuVideo.pause();
         }
+
+        function isEditableTarget(e) {
+            const el = e.target && e.target.nodeType === 1 ? e.target : (e.target ? e.target.parentElement : null);
+            return !!(el && el.closest && el.closest('input, textarea'));
+        }
+
+        ['contextmenu', 'dragstart', 'selectstart', 'copy', 'cut'].forEach(evt => {
+            document.addEventListener(evt, e => {
+                if (isEditableTarget(e)) return;
+                e.preventDefault();
+            });
+        });
     </script>
 
 
