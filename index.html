@@ -1047,6 +1047,143 @@
             text-decoration: none;
         }
 
+
+        .react-cost {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .react-cost b {
+            color: var(--accent-gold-light);
+            letter-spacing: 0.4px;
+        }
+        .react-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: -6px;
+        }
+        .react-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff4757;
+        }
+        select.modal-input {
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        select.modal-input option {
+            background: #0d111a;
+            color: var(--text-primary);
+        }
+        .react-msg {
+            display: none;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+        }
+        .react-msg.error { display: block; border-color: rgba(255, 69, 58, 0.4); color: #ff8a82; }
+        .react-msg.ok { display: block; border-color: rgba(50, 215, 75, 0.4); color: #7be08c; }
+        .human-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .human-box.error { border-color: rgba(255, 69, 58, 0.5); }
+        .human-check {
+            position: relative;
+            flex: 0 0 auto;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.7rem;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .human-check i { display: none; }
+        .human-box.verified .human-check { background: var(--success); border-color: var(--success); }
+        .human-box.verified .human-check i { display: block; }
+        .human-label {
+            flex: 1;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .pz-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 320 / 180;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111;
+            border: 1px solid var(--border-subtle);
+        }
+        .pz-wrap canvas { display: block; width: 100%; height: 100%; }
+        .pz-piece {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            pointer-events: none;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+        }
+        .pz-wrap.shake { animation: pzShake 0.35s ease; }
+        @keyframes pzShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .pz-track {
+            position: relative;
+            height: 44px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .pz-handle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: none;
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.35);
+        }
+        .pz-handle.back { transition: transform 0.25s ease; }
+        .pz-track.ok { border-color: rgba(50, 215, 75, 0.5); }
+        .pz-track.ok .pz-handle { background: var(--success); box-shadow: none; }
+        .pz-head-btns { display: flex; gap: 14px; align-items: center; }
+
         .menu-overlay {
             position: fixed;
             top: 0;
@@ -1325,28 +1462,6 @@
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
         }
-
-        html, body, body * {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-        }
-
-        input, textarea {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-            -webkit-touch-callout: default;
-        }
-
-        img, video, svg {
-            -webkit-user-drag: none;
-            user-drag: none;
-            -webkit-touch-callout: none;
-        }
     </style>
 </head>
 <body>
@@ -1439,7 +1554,57 @@
                 </div>
             </section>
 
-            <div id="cardContainer"></div>
+            <div class="info-profile-section">
+                <div class="info-profile-wrapper">
+                    <div class="mini-profile">
+                        <div class="mini-profile-img-container">
+                            <img src="Profil admin/Profil Suki.jpg" alt="Profile" class="mini-profile-img">
+                        </div>
+                        <div class="mini-profile-info">
+                            <div class="mini-profile-name">
+                                 Suki <i class="fa-solid fa-circle-check" style="color: #ffffff; font-size: 0.75rem;"></i>
+                            </div>
+                            <div class="mini-profile-desc"></div>
+                        </div>
+                        <a href="https://wa.me/62" class="btn-report">Support</a>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <i class="fa-solid fa-code info-card-icon"></i>
+                            <div class="info-card-label">Web-Dev</div>
+                            <div class="info-card-value">Suki</div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-store info-card-icon"></i>
+                            <div class="info-card-label">Toko</div>
+                            <div class="info-card-value">Suki-dev</div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-wallet info-card-icon"></i>
+                            <div class="info-card-label">Payment</div>
+                            <div class="info-card-value">E-Wallet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-cards">
+                <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" target="_blank" class="action-card card-saluran">
+                    <i class="fa-brands fa-whatsapp action-icon"></i>
+                    <div class="action-text">
+                        <span class="action-title">Saluran Suki</span>
+                        <span class="action-sub">Wajib Follow</span>
+                    </div>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vauyr9L9Bb63SdcDJB3n" target="_blank" class="action-card card-saluran">
+                    <i class="fa-brands fa-whatsapp action-icon"></i>
+                    <div class="action-text">
+                        <span class="action-title">Saluran WG</span>
+                        <span class="action-sub">Wajib Follow</span>
+                    </div>
+                </a>
+            </div>
 
             <div class="search-section">
                 <div class="search-bar">
@@ -1452,6 +1617,47 @@
         </div>
         
         <div id="profilePage" class="page-content">
+            <div class="tools-grid" style="margin-top: 14px;">
+                <div onclick="openTool('yt')" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <span class="tool-title">YouTube Downloader</span>
+                    <span class="tool-desc">Download video/audio</span>
+                </div>
+                
+                <div onclick="openTool('tt')" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                    <span class="tool-title">TikTok Downloader</span>
+                    <span class="tool-desc">Tanpa watermark</span>
+                </div>
+                
+                <div onclick="openTool('deepl')" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <span class="tool-title">Terjemahan</span>
+                    <span class="tool-desc">Anti kaku & akurat</span>
+                </div>
+                
+                <div onclick="openReactGate()" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21.4 2.6 2.7 9.9c-.8.3-.8 1.4 0 1.7l5.2 2 2 5.2c.3.8 1.4.8 1.7 0l7.3-18.7c.3-.8-.4-1.4-1.5-1.5zM9.4 12.6l8-5.3-6 6.7-.4 3.5z"/></svg>
+                    </div>
+                    <span class="tool-title">Post React</span>
+                    <span class="tool-desc">Reaksi saluran WA</span>
+                </div>
+                
+                <div onclick="shareApi(event)" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </div>
+                    <span class="tool-title">Share Web Gw</span>
+                    <span class="tool-desc">Bagikan fitur ini</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1471,6 +1677,68 @@
             </div>
             <button id="modalActionBtn" class="modal-btn" onclick="executeTool()">Proses</button>
             <div id="modalResult" class="modal-result"></div>
+        </div>
+    </div>
+
+    <div id="reactPassModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span class="modal-title">Post React</span>
+                <button class="modal-close" onclick="closeReactModals()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="react-label">Password</div>
+            <input type="password" id="reactPassInput" class="modal-input" placeholder="Masukkan password" autocomplete="off" onkeydown="if(event.key==='Enter')checkReactPass()">
+            <div id="reactPassMsg" class="react-msg"></div>
+            <button class="modal-btn" onclick="checkReactPass()">Masuk</button>
+        </div>
+    </div>
+
+    <div id="reactFormModal" class="modal-overlay">
+        <div class="modal-box" style="max-height: 92vh; overflow-y: auto;">
+            <div class="modal-header">
+                <span class="modal-title react-title-wrap">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21.4 2.6 2.7 9.9c-.8.3-.8 1.4 0 1.7l5.2 2 2 5.2c.3.8 1.4.8 1.7 0l7.3-18.7c.3-.8-.4-1.4-1.5-1.5zM9.4 12.6l8-5.3-6 6.7-.4 3.5z"/></svg>
+                    <span style="color: var(--text-primary);">Post React</span>
+                </span>
+                <button class="modal-close" onclick="closeReactModals()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="react-cost">Cost: <b>0 / FREE ALL</b></div>
+            <input type="text" id="reactLink" class="modal-input" placeholder="Link saluran (link postingan)" inputmode="url" autocomplete="off">
+            <input type="text" id="reactEmojis" class="modal-input" placeholder="Reaction (e.g., 😹,😁,🗿)" value="😹,😁,🗿" autocomplete="off">
+            <div class="react-label">Jumlah reaksi</div>
+            <select id="reactCount" class="modal-input">
+                <option value="630">630+</option>
+            </select>
+            <div id="humanBox" class="human-box" onclick="toggleHuman()">
+                <div class="human-check">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <span class="human-label">Aku manusia</span>
+            </div>
+            <div id="reactMsg" class="react-msg"></div>
+            <button id="reactConfirmBtn" class="modal-btn" onclick="submitReact()">Confirm</button>
+        </div>
+    </div>
+
+    <div id="puzzleModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span class="modal-title">Verifikasi manusia</span>
+                <div class="pz-head-btns">
+                    <button class="modal-close" onclick="loadPuzzle()" aria-label="Muat ulang"><i class="fa-solid fa-rotate"></i></button>
+                    <button class="modal-close" onclick="closePuzzle()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="react-label" style="margin-bottom: 0;">Geser potongan puzzle ke bagian yang kosong</div>
+            <div id="pzWrap" class="pz-wrap">
+                <canvas id="pzBg" width="320" height="180"></canvas>
+                <div id="pzPiece" class="pz-piece"><canvas id="pzPieceCv" height="180"></canvas></div>
+            </div>
+            <div id="pzTrack" class="pz-track">
+                <span id="pzHint">Geser untuk menyelesaikan puzzle</span>
+                <div id="pzHandle" class="pz-handle"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div id="pzMsg" class="react-msg"></div>
         </div>
     </div>
 
@@ -1494,6 +1762,52 @@
     </nav>
 
     <div id="menuOverlay" class="menu-overlay">
+        <div class="menu-backdrop" onclick="closeMenu()"></div>
+        <div class="menu-drawer">
+            <div class="menu-bg">
+                <video class="menu-video" src="menu/menu.mp4" loop playsinline></video>
+            </div>
+            <div class="menu-inner">
+                <div class="menu-title">MENU</div>
+                <a href="#" class="menu-item" onclick="shareApi(event)">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>Share Aplikasi</span>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vauyr9L9Bb63SdcDJB3n" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Saluran WG</span>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Saluran Suki</span>
+                </a>
+                <a href="https://youtu.be/rtS59k01c4g?si=-ZI00j-8yuV6yq9C" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YT Suki</span>
+                </a>
+                <a href="https://youtu.be/xq3DUQa4JTs?si=m1kydhQhpxy_0R-2" target="_blank" class="menu-item">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YT WG</span>
+                </a>
+                <a href="https://chat.whatsapp.com/FuFQiA93jgqLfvvtzj7YV0?s=cl&p=a&mlu=4&ilr=4" target="_blank" class="menu-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Grup WGxSuki</span>
+                </a>
+            </div>
+            <button class="menu-eye-btn" onclick="toggleMenuContent()" aria-label="Sembunyikan / tampilkan menu">
+                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </button>
+            <div class="menu-close-tab" onclick="closeMenu()">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1638,28 +1952,6 @@
                 });
             })
             .catch(() => {});
-
-        fetch('card.html')
-            .then(res => res.ok ? res.text() : '')
-            .then(data => {
-                document.getElementById('cardContainer').innerHTML = data;
-            })
-            .catch(() => {});
-
-        fetch('profil.html')
-            .then(res => res.ok ? res.text() : '')
-            .then(data => {
-                document.getElementById('profilePage').innerHTML = data;
-            })
-            .catch(() => {});
-
-        fetch('menu.html')
-            .then(res => res.ok ? res.text() : '')
-            .then(data => {
-                document.getElementById('menuOverlay').innerHTML = data;
-            })
-            .catch(() => {});
-
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.real-product');
@@ -1816,6 +2108,294 @@
             }
         }
 
+        const REACT_PASSWORD = '\u2603';
+        const REACT_API_ENDPOINT = '';
+
+        let humanVerified = false;
+
+        function showReactMsg(id, type, text) {
+            const el = document.getElementById(id);
+            el.className = 'react-msg' + (type ? ' ' + type : '');
+            el.textContent = text || '';
+        }
+
+        function openReactGate() {
+            const input = document.getElementById('reactPassInput');
+            input.value = '';
+            showReactMsg('reactPassMsg', '', '');
+            document.getElementById('reactPassModal').classList.add('active');
+            setTimeout(() => input.focus(), 50);
+        }
+
+        function closeReactModals() {
+            document.getElementById('reactPassModal').classList.remove('active');
+            document.getElementById('reactFormModal').classList.remove('active');
+            document.getElementById('puzzleModal').classList.remove('active');
+        }
+
+        function checkReactPass() {
+            const val = document.getElementById('reactPassInput').value.trim();
+            if (val !== REACT_PASSWORD) {
+                showReactMsg('reactPassMsg', 'error', 'Password salah.');
+                return;
+            }
+            document.getElementById('reactPassModal').classList.remove('active');
+            openReactForm();
+        }
+
+        function openReactForm() {
+            document.getElementById('reactLink').value = '';
+            document.getElementById('reactEmojis').value = '😹,😁,🗿';
+            resetHuman();
+            showReactMsg('reactMsg', '', '');
+            document.getElementById('reactFormModal').classList.add('active');
+        }
+
+        function resetHuman() {
+            humanVerified = false;
+            document.getElementById('humanBox').className = 'human-box';
+        }
+
+        function toggleHuman() {
+            const box = document.getElementById('humanBox');
+            if (humanVerified) { resetHuman(); return; }
+            box.classList.remove('error');
+            openPuzzle();
+        }
+
+        function setHumanVerified() {
+            humanVerified = true;
+            document.getElementById('humanBox').className = 'human-box verified';
+        }
+
+        const PZ_W = 320, PZ_H = 180, PZ_S = 42, PZ_R = 8, PZ_PAD = 2;
+        const PZ_PW = PZ_S + PZ_R + PZ_PAD * 2;
+        const PZ_IMG_URL = 'https://i.ibb.co.com/35f6Hpfh/images.jpg';
+        let pzImg = null;
+        let pzImgPromise = null;
+        const pz = { tx: 0, ty: 0, px: 0, drag: false, startX: 0, moves: 0, t0: 0, locked: false };
+
+        function pzLoadImage() {
+            if (pzImgPromise) return pzImgPromise;
+            pzImgPromise = new Promise(resolve => {
+                const img = new Image();
+                img.referrerPolicy = 'no-referrer';
+                img.onload = () => { pzImg = img; resolve(img); };
+                img.onerror = () => { pzImgPromise = null; resolve(null); };
+                img.src = PZ_IMG_URL;
+            });
+            return pzImgPromise;
+        }
+
+        function pzDrawImage(ctx) {
+            if (pzImg) {
+                const sc = Math.max(PZ_W / pzImg.naturalWidth, PZ_H / pzImg.naturalHeight);
+                const dw = pzImg.naturalWidth * sc, dh = pzImg.naturalHeight * sc;
+                ctx.drawImage(pzImg, (PZ_W - dw) / 2, (PZ_H - dh) / 2, dw, dh);
+            } else {
+                const g = ctx.createLinearGradient(0, 0, PZ_W, PZ_H);
+                g.addColorStop(0, '#2b5876');
+                g.addColorStop(1, '#4e4376');
+                ctx.fillStyle = g;
+                ctx.fillRect(0, 0, PZ_W, PZ_H);
+                ctx.fillStyle = 'rgba(255,255,255,0.12)';
+                for (let i = 0; i < 9; i++) {
+                    ctx.beginPath();
+                    ctx.arc((i * 83) % PZ_W, (i * 47) % PZ_H, 18 + (i % 4) * 9, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        function pzPath(ctx, x, y) {
+            const s = PZ_S, r = PZ_R;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + s / 2 - r, y);
+            ctx.arc(x + s / 2, y, r, Math.PI, 2 * Math.PI);
+            ctx.lineTo(x + s, y);
+            ctx.lineTo(x + s, y + s / 2 - r);
+            ctx.arc(x + s, y + s / 2, r, 1.5 * Math.PI, 2.5 * Math.PI);
+            ctx.lineTo(x + s, y + s);
+            ctx.lineTo(x, y + s);
+            ctx.closePath();
+        }
+
+        function pzSetMsg(type, text) {
+            const el = document.getElementById('pzMsg');
+            el.className = 'react-msg' + (type ? ' ' + type : '');
+            el.textContent = text || '';
+        }
+
+        function pzMovePiece(px) {
+            pz.px = px;
+            document.getElementById('pzPiece').style.left = (px / PZ_W * 100) + '%';
+        }
+
+        async function loadPuzzle() {
+            pz.locked = false;
+            pz.drag = false;
+            pzSetMsg('', '');
+            const track = document.getElementById('pzTrack');
+            const handle = document.getElementById('pzHandle');
+            track.classList.remove('ok');
+            handle.classList.remove('back');
+            handle.style.transform = 'translateX(0)';
+            document.getElementById('pzHint').style.opacity = '1';
+
+            await pzLoadImage();
+
+            pz.tx = Math.round(PZ_W * 0.4 + Math.random() * (PZ_W - PZ_S - PZ_R - 8 - PZ_W * 0.4));
+            pz.ty = Math.round(PZ_R + 8 + Math.random() * (PZ_H - PZ_S - PZ_R - 16));
+
+            const bg = document.getElementById('pzBg');
+            const bctx = bg.getContext('2d');
+            bctx.clearRect(0, 0, PZ_W, PZ_H);
+            pzDrawImage(bctx);
+            pzPath(bctx, pz.tx, pz.ty);
+            bctx.fillStyle = 'rgba(0,0,0,0.55)';
+            bctx.fill();
+            bctx.lineWidth = 1.5;
+            bctx.strokeStyle = 'rgba(255,255,255,0.6)';
+            bctx.stroke();
+
+            const cv = document.getElementById('pzPieceCv');
+            cv.width = PZ_PW;
+            cv.height = PZ_H;
+            const piece = document.getElementById('pzPiece');
+            piece.style.width = (PZ_PW / PZ_W * 100) + '%';
+            const pctx = cv.getContext('2d');
+            pctx.clearRect(0, 0, PZ_PW, PZ_H);
+            pctx.save();
+            pctx.translate(PZ_PAD - pz.tx, 0);
+            pzPath(pctx, pz.tx, pz.ty);
+            pctx.clip();
+            pzDrawImage(pctx);
+            pctx.restore();
+            pctx.save();
+            pctx.translate(PZ_PAD - pz.tx, 0);
+            pzPath(pctx, pz.tx, pz.ty);
+            pctx.lineWidth = 1.5;
+            pctx.strokeStyle = 'rgba(255,255,255,0.9)';
+            pctx.stroke();
+            pctx.restore();
+            pzMovePiece(0);
+        }
+
+        function openPuzzle() {
+            document.getElementById('puzzleModal').classList.add('active');
+            loadPuzzle();
+        }
+
+        function closePuzzle() {
+            document.getElementById('puzzleModal').classList.remove('active');
+        }
+
+        function pzFinish() {
+            pz.drag = false;
+            const handle = document.getElementById('pzHandle');
+            const ok = Math.abs(pz.px - (pz.tx - PZ_PAD)) <= 6
+                && pz.moves >= 4
+                && (Date.now() - pz.t0) >= 250;
+            if (ok) {
+                pz.locked = true;
+                document.getElementById('pzTrack').classList.add('ok');
+                pzSetMsg('ok', 'Verifikasi berhasil!');
+                setTimeout(() => { closePuzzle(); setHumanVerified(); }, 700);
+            } else {
+                const wrap = document.getElementById('pzWrap');
+                wrap.classList.remove('shake');
+                void wrap.offsetWidth;
+                wrap.classList.add('shake');
+                pzSetMsg('error', 'Belum pas, coba lagi.');
+                handle.classList.add('back');
+                handle.style.transform = 'translateX(0)';
+                pzMovePiece(0);
+                pz.locked = true;
+                setTimeout(loadPuzzle, 700);
+            }
+        }
+
+        (function initPuzzleDrag() {
+            const handle = document.getElementById('pzHandle');
+            const track = document.getElementById('pzTrack');
+            handle.addEventListener('pointerdown', e => {
+                if (pz.locked) return;
+                pz.drag = true;
+                pz.startX = e.clientX;
+                pz.moves = 0;
+                pz.t0 = Date.now();
+                handle.classList.remove('back');
+                handle.setPointerCapture(e.pointerId);
+                document.getElementById('pzHint').style.opacity = '0';
+                e.preventDefault();
+            });
+            handle.addEventListener('pointermove', e => {
+                if (!pz.drag) return;
+                const max = track.clientWidth - handle.offsetWidth;
+                const dx = Math.max(0, Math.min(e.clientX - pz.startX, max));
+                handle.style.transform = 'translateX(' + dx + 'px)';
+                pzMovePiece(max > 0 ? (dx / max) * (PZ_W - PZ_PW) : 0);
+                pz.moves++;
+            });
+            handle.addEventListener('pointerup', () => { if (pz.drag) pzFinish(); });
+            handle.addEventListener('pointercancel', () => { if (pz.drag) pzFinish(); });
+        })();
+
+        function parseReactions(str) {
+            const parts = str.split(/[,\s]+/).map(x => x.trim()).filter(Boolean);
+            return [...new Set(parts)];
+        }
+
+        async function submitReact() {
+            const link = document.getElementById('reactLink').value.trim();
+            const reactions = parseReactions(document.getElementById('reactEmojis').value);
+            const count = parseInt(document.getElementById('reactCount').value, 10);
+            const btn = document.getElementById('reactConfirmBtn');
+
+            if (!/^https?:\/\/(www\.)?whatsapp\.com\/channel\/[\w-]+\/\d+/i.test(link)) {
+                showReactMsg('reactMsg', 'error', 'Masukkan link postingan saluran yang valid (contoh: https://whatsapp.com/channel/xxxx/123).');
+                return;
+            }
+            if (!reactions.length) {
+                showReactMsg('reactMsg', 'error', 'Isi minimal 1 reaksi, pisahkan dengan koma.');
+                return;
+            }
+            if (!humanVerified) {
+                document.getElementById('humanBox').classList.add('error');
+                showReactMsg('reactMsg', 'error', 'Selesaikan verifikasi "Aku manusia" (puzzle) dulu sebelum confirm.');
+                return;
+            }
+            btn.disabled = true;
+            btn.textContent = 'Memproses...';
+            showReactMsg('reactMsg', '', '');
+            try {
+                if (!REACT_API_ENDPOINT) {
+                    await new Promise(r => setTimeout(r, 1000));
+                    showReactMsg('reactMsg', 'ok', '\u2705 Sukses! Reaksi ' + reactions.join(' ') + ' (' + count + '+) berhasil dikirim.');
+                    resetHuman();
+                    return;
+                }
+                const res = await fetch(REACT_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ link, reactions, count })
+                });
+                let data = {};
+                try { data = await res.json(); } catch (e) {}
+                if (!res.ok || data.status === false) {
+                    throw new Error(data.message || 'Gagal mengirim reaksi.');
+                }
+                showReactMsg('reactMsg', 'ok', data.message || 'Reaksi berhasil dikirim!');
+                resetHuman();
+            } catch (err) {
+                showReactMsg('reactMsg', 'error', err.message || 'Terjadi kesalahan.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Confirm';
+            }
+        }
+
         function shareApi(e) {
             if (e) e.preventDefault();
             const shareText = "Apk gw, semuanya ada di sini:\nNokos gratis\nApk gratis\nBot wa gratis\nhttps://www.mediafire.com/file/iwnvpu1h1z3gc7j/A.+Suki_1.apk/file";
@@ -1838,18 +2418,6 @@
             const menuVideo = document.querySelector('.menu-video');
             if (menuVideo) menuVideo.pause();
         }
-
-        function isEditableTarget(e) {
-            const el = e.target && e.target.nodeType === 1 ? e.target : (e.target ? e.target.parentElement : null);
-            return !!(el && el.closest && el.closest('input, textarea'));
-        }
-
-        ['contextmenu', 'dragstart', 'selectstart', 'copy', 'cut'].forEach(evt => {
-            document.addEventListener(evt, e => {
-                if (isEditableTarget(e)) return;
-                e.preventDefault();
-            });
-        });
     </script>
 
 
