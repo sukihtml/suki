@@ -1504,24 +1504,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(20, 24, 28, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             z-index: 100000;
-            animation: eventFade 0.25s ease;
+            animation: eventFade 0.2s ease;
         }
 
         .event-box {
             position: relative;
             width: 100%;
             max-width: 380px;
-            background: #e8e8e8;
-            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-            animation: eventPop 0.3s ease;
+            background: linear-gradient(180deg, #ebebeb 0%, #e3e3e3 100%);
+            border-radius: 16px;
+            box-shadow:
+                0 1px 1px rgba(0, 0, 0, 0.07),
+                0 2px 2px rgba(0, 0, 0, 0.07),
+                0 4px 4px rgba(0, 0, 0, 0.07),
+                0 8px 8px rgba(0, 0, 0, 0.07),
+                0 16px 16px rgba(0, 0, 0, 0.07),
+                0 32px 32px rgba(0, 0, 0, 0.07);
+            animation: eventPop 0.25s ease;
         }
 
         .event-img {
@@ -1536,18 +1542,26 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            border: none;
-            background: #3d3f42;
-            color: #e8e8e8;
-            font-size: 0.8rem;
+            border: 1px solid rgba(61, 63, 66, 0.25);
+            background: #e8e8e8;
+            color: #3d3f42;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 2;
+            box-shadow:
+                0 1px 1px rgba(0, 0, 0, 0.08),
+                0 2px 2px rgba(0, 0, 0, 0.08),
+                0 4px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .event-skip:active {
+            transform: scale(0.92);
         }
 
         .event-actions {
@@ -1558,10 +1572,12 @@
         }
 
         .event-btn {
+            position: relative;
+            overflow: hidden;
             width: 100%;
-            height: 46px;
+            height: 48px;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1579,18 +1595,46 @@
             font-size: 1.1rem;
         }
 
+        .event-btn span {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .event-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+            animation: eventShimmer 2.6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
         .event-btn:active {
-            transform: scale(0.98);
+            transform: scale(0.985);
         }
 
         .event-btn-share {
-            background: #3d3f42;
-            color: #ececec;
+            background: linear-gradient(180deg, #62666b 0%, #5a5d62 100%);
+            color: #f2f2f2;
+            box-shadow:
+                0 1px 1px rgba(0, 0, 0, 0.09),
+                0 2px 2px rgba(0, 0, 0, 0.09),
+                0 4px 4px rgba(0, 0, 0, 0.09),
+                0 8px 8px rgba(0, 0, 0, 0.09);
         }
 
         .event-btn-tele {
-            background: #9fd0e8;
+            background: linear-gradient(180deg, #a2d2e9 0%, #99cbe3 100%);
             color: #2f3236;
+            box-shadow:
+                0 1px 1px rgba(0, 0, 0, 0.08),
+                0 2px 2px rgba(0, 0, 0, 0.08),
+                0 4px 4px rgba(0, 0, 0, 0.08),
+                0 8px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .event-btn-tele::after {
+            animation-delay: 0.5s;
         }
 
         @keyframes eventFade {
@@ -1599,8 +1643,13 @@
         }
 
         @keyframes eventPop {
-            from { opacity: 0; transform: translateY(12px) scale(0.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes eventShimmer {
+            0% { transform: translateX(-100%); }
+            60%, 100% { transform: translateX(100%); }
         }
     </style>
 </head>
@@ -1984,7 +2033,7 @@
                 </button>
                 <a href="https://t.me/suki7111" target="_blank" class="event-btn event-btn-tele">
                     <i class="fa-brands fa-telegram"></i>
-                    <span>Telegram Admin</span>
+                    <span>Telegram</span>
                 </a>
             </div>
         </div>
