@@ -1,4 +1,4 @@
-const CACHE_NAME = 'suki-store-v2';
+const CACHE_NAME = 'suki-store-v3';
 const ASSETS = [
   '/',
   '/index.html',
