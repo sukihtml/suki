@@ -1537,7 +1537,7 @@
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                     <span class="visitor-num" id="visitorCount">625</span>
-                    <span class="visitor-label">pengunjung</span>
+                    <span class="visitor-label">pendownload</span>
                 </div>
                 <button class="menu-btn" onclick="openMenu()" aria-label="Menu">
                     <svg viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
@@ -1920,7 +1920,7 @@
             [10, 18, 3515],
             [10, 26, 3899],
             [11, 1, 4241]
-        ].map(([m, d, v]) => [Date.UTC(2026, m, d) - 7 * 3600 * 1000, v]);
+        ].map(([m, d, v]) => [Date.UTC(2026, m, d) - 7 * 3600 * 1000, v * 3]);
 
         function getVisitorCount() {
             const now = Date.now();
