@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Teko:wght@600;700&amp;family=Syne:wght@800&amp;family=Outfit:wght@600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -1496,6 +1497,111 @@
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
         }
+
+        .event-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 24, 28, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 100000;
+            animation: eventFade 0.25s ease;
+        }
+
+        .event-box {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            background: #e8e8e8;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            animation: eventPop 0.3s ease;
+        }
+
+        .event-img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #d9dde0;
+        }
+
+        .event-skip {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: #3d3f42;
+            color: #e8e8e8;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .event-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 14px;
+        }
+
+        .event-btn {
+            width: 100%;
+            height: 46px;
+            border: none;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .event-btn i {
+            font-size: 1.1rem;
+        }
+
+        .event-btn:active {
+            transform: scale(0.98);
+        }
+
+        .event-btn-share {
+            background: #3d3f42;
+            color: #ececec;
+        }
+
+        .event-btn-tele {
+            background: #9fd0e8;
+            color: #2f3236;
+        }
+
+        @keyframes eventFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes eventPop {
+            from { opacity: 0; transform: translateY(12px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -1863,6 +1969,23 @@
             </button>
             <div class="menu-close-tab" onclick="closeMenu()">
                 <i class="fa-solid fa-chevron-left"></i>
+            </div>
+        </div>
+    </div>
+
+    <div id="eventModal" class="event-overlay">
+        <div class="event-box">
+            <button class="event-skip" onclick="closeEventModal()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            <img src="Profil admin/event.jpg" alt="Event Reaction Saluran WA" class="event-img">
+            <div class="event-actions">
+                <button class="event-btn event-btn-share" onclick="shareEvent()">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Share Sekarang</span>
+                </button>
+                <a href="https://t.me/suki7111" target="_blank" class="event-btn event-btn-tele">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span>Telegram Admin</span>
+                </a>
             </div>
         </div>
     </div>
@@ -2510,6 +2633,15 @@
             document.getElementById('menuOverlay').classList.remove('active');
             const menuVideo = document.querySelector('.menu-video');
             if (menuVideo) menuVideo.pause();
+        }
+
+        function shareEvent() {
+            const eventText = "Mau bot reaction saluran wa gratis? Download apk nya sekarang, terbatas!\nhttps://www.mediafire.com/file/iwnvpu1h1z3gc7j/A.+Suki_1.apk/file";
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(eventText), '_blank');
+        }
+
+        function closeEventModal() {
+            document.getElementById('eventModal').style.display = 'none';
         }
     </script>
 
