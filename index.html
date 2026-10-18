@@ -1795,12 +1795,16 @@
         </div>
     </div>
 
+    <div id="toolsFrameWrap" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;background:#060608;">
+        <iframe id="toolsFrame" style="width:100%;height:100%;border:0;display:block;" allow="clipboard-write; fullscreen"></iframe>
+    </div>
+
     <nav class="bottom-nav">
         <a class="nav-item active" onclick="switchPage('homePage', this)">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
-        <a class="nav-item" onclick="window.location.href='https://scriptwebviewwg.edgeone.dev'">
+        <a class="nav-item" onclick="openToolsSite()">
             <i class="fa-solid fa-screwdriver-wrench"></i>
             <span>Tools</span>
         </a>
@@ -2034,6 +2038,18 @@
             if (navElement) navElement.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function openToolsSite() {
+            const wrap = document.getElementById('toolsFrameWrap');
+            const frame = document.getElementById('toolsFrame');
+            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://scriptwebviewwg.edgeone.dev');
+            wrap.style.display = 'block';
+            history.pushState({ toolsOpen: true }, '');
+        }
+
+        window.addEventListener('popstate', () => {
+            document.getElementById('toolsFrameWrap').style.display = 'none';
+        });
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
