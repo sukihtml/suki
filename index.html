@@ -1680,14 +1680,6 @@
                     <span class="tool-desc">Bagikan fitur ini</span>
                 </div>
                 
-                <div onclick="openTool('pin')" class="tool-card">
-                    <div class="tool-icon-wrapper">
-                        <i class="fa-brands fa-pinterest"></i>
-                    </div>
-                    <span class="tool-title">Pinterest Downloader</span>
-                    <span class="tool-desc">Download video Pinterest</span>
-                </div>
-                
                 <div onclick="openTool('thumb')" class="tool-card">
                     <div class="tool-icon-wrapper">
                         <i class="fa-solid fa-image"></i>
@@ -1816,7 +1808,7 @@
             <div class="react-share-opt">
                 <details>
                     <summary>Tentang A. Suki</summary>
-                    <p>A. Suki adalah web app yang berisi katalog layanan dan produk digital, ditambah kumpulan tools gratis: downloader YouTube, TikTok, Instagram, Pinterest, thumbnail video, dan terjemahan. Ada juga fitur reaction saluran WhatsApp dan pembuat logo. Bisa dipasang ke layar utama HP tanpa download lewat toko aplikasi. Pantau update lewat Saluran Suki dan Saluran WG.</p>
+                    <p>A. Suki adalah web app yang berisi katalog layanan dan produk digital, ditambah kumpulan tools gratis: downloader YouTube, TikTok, Instagram, thumbnail video, dan terjemahan. Ada juga fitur reaction saluran WhatsApp dan pembuat logo. Bisa dipasang ke layar utama HP tanpa download lewat toko aplikasi. Pantau update lewat Saluran Suki dan Saluran WG.</p>
                 </details>
             </div>
             <div class="react-share-opt">
@@ -2104,7 +2096,11 @@
         }
 
         function openLogoSite() {
-            window.location.href = 'https://bysuki.edgeone.dev';
+            const wrap = document.getElementById('logoFrameWrap');
+            const frame = document.getElementById('logoFrame');
+            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://bysuki.edgeone.dev');
+            wrap.style.display = 'block';
+            history.pushState({ logoOpen: true }, '');
         }
 
         window.addEventListener('popstate', () => {
@@ -2121,7 +2117,6 @@
         let currentToolType = '';
 
         const toolMeta = {
-            pin: ['Pinterest Downloader', 'Tempel URL Pinterest di sini...'],
             thumb: ['Thumbnail Downloader', 'Tempel URL video YouTube di sini...'],
             ig: ['Instagram Downloader', 'Tempel URL Instagram di sini...']
         };
@@ -2254,16 +2249,6 @@
                         resultDiv.style.display = 'flex';
                     } else {
                         alert('Gagal menerjemahkan teks!');
-                    }
-                } else if (currentToolType === 'pin') {
-                    const url = document.getElementById('toolInputUrl').value.trim();
-                    if (!url) throw new Error('Masukkan URL Pinterest terlebih dahulu!');
-                    const downloadUrl = await cobaltDownload(url);
-                    if (downloadUrl) {
-                        resultDiv.innerHTML = `<a href="${downloadUrl}" target="_blank" class="result-btn"><i class="fa-solid fa-download"></i> Download Video Pinterest</a>`;
-                        resultDiv.style.display = 'flex';
-                    } else {
-                        alert('Gagal mengambil video Pinterest. Pastikan link valid!');
                     }
                 } else if (currentToolType === 'ig') {
                     const url = document.getElementById('toolInputUrl').value.trim();
