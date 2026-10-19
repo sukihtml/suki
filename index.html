@@ -2104,11 +2104,7 @@
         }
 
         function openLogoSite() {
-            const wrap = document.getElementById('logoFrameWrap');
-            const frame = document.getElementById('logoFrame');
-            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://bysuki.edgeone.dev');
-            wrap.style.display = 'block';
-            history.pushState({ logoOpen: true }, '');
+            window.location.href = 'https://bysuki.edgeone.dev';
         }
 
         window.addEventListener('popstate', () => {
