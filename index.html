@@ -2090,16 +2090,18 @@
         function openToolsSite() {
             const wrap = document.getElementById('toolsFrameWrap');
             const frame = document.getElementById('toolsFrame');
-            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://scriptwebviewwg.edgeone.dev');
+            document.getElementById('logoFrameWrap').style.display = 'none';
             wrap.style.display = 'block';
+            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://scriptwebviewwg.edgeone.dev');
             history.pushState({ toolsOpen: true }, '');
         }
 
         function openLogoSite() {
             const wrap = document.getElementById('logoFrameWrap');
             const frame = document.getElementById('logoFrame');
-            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://bysuki.edgeone.dev');
+            document.getElementById('toolsFrameWrap').style.display = 'none';
             wrap.style.display = 'block';
+            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://bysuki.edgeone.dev');
             history.pushState({ logoOpen: true }, '');
         }
 
