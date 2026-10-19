@@ -635,6 +635,18 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
+        body::after {
+            content: '';
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 14px;
+            background: var(--bg-base);
+            z-index: 99;
+            pointer-events: none;
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
