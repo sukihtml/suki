@@ -1728,8 +1728,9 @@
             <header class="header">
                 <div class="visitor-badge">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
                     <span class="visitor-num" id="visitorCount">625</span>
                     <span class="visitor-label">pendownload</span>
@@ -2146,14 +2147,14 @@
         const visitorMilestones = [
             [9, 16, 625],
             [9, 18, 821],
-            [9, 22, 1284],
-            [9, 28, 1973],
-            [10, 2, 2101],
-            [10, 6, 2401],
-            [10, 12, 3256],
-            [10, 18, 3515],
-            [10, 26, 3899],
-            [11, 1, 4241]
+            [9, 22, 2104],
+            [9, 28, 3233],
+            [10, 2, 3443],
+            [10, 6, 3934],
+            [10, 12, 5335],
+            [10, 18, 5760],
+            [10, 26, 6389],
+            [11, 1, 6949]
         ].map(([m, d, v]) => [Date.UTC(2026, m, d) - 7 * 3600 * 1000, v * 3]);
 
         function getVisitorCount() {
