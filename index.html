@@ -995,6 +995,19 @@
             font-size: 1.2rem;
             cursor: pointer;
         }
+        .modal-box.shake-x,
+        .event-box.shake-x {
+            animation: modalShakeX 0.4s ease;
+        }
+        @keyframes modalShakeX {
+            0%, 100% { transform: translateX(0); }
+            15% { transform: translateX(-10px); }
+            30% { transform: translateX(9px); }
+            45% { transform: translateX(-7px); }
+            60% { transform: translateX(5px); }
+            75% { transform: translateX(-3px); }
+            90% { transform: translateX(2px); }
+        }
         .modal-input {
             width: 100%;
             padding: 12px 14px;
@@ -1564,6 +1577,33 @@
             transform: scale(0.92);
         }
 
+        .event-gameplay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: 28px;
+            padding: 0 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            text-decoration: none;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .event-gameplay:active {
+            transform: scale(0.95);
+        }
+
         .event-actions {
             display: flex;
             flex-direction: column;
@@ -1854,7 +1894,7 @@
         <div class="modal-box">
             <div class="modal-header">
                 <span id="modalTitle" class="modal-title">Tool</span>
-                <button class="modal-close" onclick="closeToolModal()"><i class="fa-solid fa-xmark"></i></button>
+                <button class="modal-close" onclick="shakeClose(this, closeToolModal)"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div id="modalInputContainer">
                 <input type="text" id="toolInputUrl" class="modal-input" placeholder="Tempel URL di sini...">
@@ -1873,7 +1913,7 @@
         <div class="modal-box" style="max-height: 92vh; overflow-y: auto;">
             <div class="modal-header">
                 <span class="modal-title">Post React</span>
-                <button class="modal-close" onclick="closeReactModals()"><i class="fa-solid fa-xmark"></i></button>
+                <button class="modal-close" onclick="shakeClose(this, closeReactModals)"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="react-label">Share link MediaFire aplikasi ke grup orang atau grup/saluran pribadi untuk membuka fitur ini</div>
             <div class="react-share-opt">
@@ -1908,7 +1948,7 @@
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21.4 2.6 2.7 9.9c-.8.3-.8 1.4 0 1.7l5.2 2 2 5.2c.3.8 1.4.8 1.7 0l7.3-18.7c.3-.8-.4-1.4-1.5-1.5zM9.4 12.6l8-5.3-6 6.7-.4 3.5z"/></svg>
                     <span style="color: var(--text-primary);">Post React</span>
                 </span>
-                <button class="modal-close" onclick="closeReactModals()"><i class="fa-solid fa-xmark"></i></button>
+                <button class="modal-close" onclick="shakeClose(this, closeReactModals)"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="react-cost">Cost: <b>0 / FREE ALL</b></div>
             <input type="text" id="reactLink" class="modal-input" placeholder="Link saluran (link postingan)" inputmode="url" autocomplete="off">
@@ -1934,7 +1974,7 @@
                 <span class="modal-title">Verifikasi manusia</span>
                 <div class="pz-head-btns">
                     <button class="modal-close" onclick="loadPuzzle()" aria-label="Muat ulang"><i class="fa-solid fa-rotate"></i></button>
-                    <button class="modal-close" onclick="closePuzzle()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="modal-close" onclick="shakeClose(this, closePuzzle)" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
             <div class="react-label" style="margin-bottom: 0;">Geser potongan puzzle ke bagian yang kosong</div>
@@ -1954,6 +1994,10 @@
         <iframe id="toolsFrame" style="width:100%;height:100%;border:0;display:block;" allow="clipboard-write; fullscreen"></iframe>
     </div>
 
+    <div id="logoFrameWrap" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:999999;background:#060608;">
+        <iframe id="logoFrame" style="width:100%;height:100%;border:0;display:block;" allow="clipboard-write; fullscreen"></iframe>
+    </div>
+
     <nav class="bottom-nav">
         <a class="nav-item active" onclick="switchPage('homePage', this)">
             <i class="fa-solid fa-house"></i>
@@ -1963,9 +2007,9 @@
             <i class="fa-solid fa-screwdriver-wrench"></i>
             <span>Tools</span>
         </a>
-        <a class="nav-item" style="cursor: not-allowed; pointer-events: none; opacity: 0.5;" onclick="return false;">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span>Keranjang</span>
+        <a class="nav-item" onclick="openLogoSite()">
+            <i class="fa-solid fa-image"></i>
+            <span>logo</span>
         </a>
         <a class="nav-item" onclick="switchPage('profilePage', this)">
             <i class="fa-regular fa-user"></i>
@@ -2022,9 +2066,27 @@
         </div>
     </div>
 
+    <div id="eventModal2" class="event-overlay">
+        <div class="event-box">
+            <button class="event-skip" onclick="shakeClose(this, closeEventModal2)" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            <img src="Profil admin/event2.jpg" alt="Event Reaction Saluran WA" class="event-img">
+            <div class="event-actions">
+                <button class="event-btn event-btn-share" onclick="shareEvent()">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Share Sekarang</span>
+                </button>
+                <a href="https://t.me/suki7111" target="_blank" class="event-btn event-btn-tele">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span>Telegram</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <div id="eventModal" class="event-overlay">
         <div class="event-box">
-            <button class="event-skip" onclick="closeEventModal()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            <button class="event-skip" onclick="shakeClose(this, closeEventModal)" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+            <a href="Profil admin/vd.mp4" target="_blank" class="event-gameplay">gameplay offline</a>
             <img src="Profil admin/event.jpg" alt="Event Reaction Saluran WA" class="event-img">
             <div class="event-actions">
                 <button class="event-btn event-btn-share" onclick="shareEvent()">
@@ -2219,8 +2281,17 @@
             history.pushState({ toolsOpen: true }, '');
         }
 
+        function openLogoSite() {
+            const wrap = document.getElementById('logoFrameWrap');
+            const frame = document.getElementById('logoFrame');
+            if (!frame.getAttribute('src')) frame.setAttribute('src', 'https://bysuki.edgeone.dev');
+            wrap.style.display = 'block';
+            history.pushState({ logoOpen: true }, '');
+        }
+
         window.addEventListener('popstate', () => {
             document.getElementById('toolsFrameWrap').style.display = 'none';
+            document.getElementById('logoFrameWrap').style.display = 'none';
         });
 
         if ('serviceWorker' in navigator) {
@@ -2691,6 +2762,20 @@
 
         function closeEventModal() {
             document.getElementById('eventModal').style.display = 'none';
+        }
+
+        function closeEventModal2() {
+            document.getElementById('eventModal2').style.display = 'none';
+        }
+
+        function shakeClose(btn, closeFn) {
+            const box = btn.closest('.modal-box, .event-box');
+            if (!box || box.classList.contains('shake-x')) return;
+            box.classList.add('shake-x');
+            setTimeout(() => {
+                box.classList.remove('shake-x');
+                closeFn();
+            }, 400);
         }
     </script>
 
