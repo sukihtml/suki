@@ -2,7 +2,7 @@
 <html lang="id"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Suki Store</title>
+    <title>A. Suki</title>
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -308,30 +308,6 @@
             object-fit: cover;
         }
 
-        .carousel-indicators {
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 5px;
-            z-index: 2;
-        }
-
-        .dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: var(--accent-gold);
-            width: 14px;
-            border-radius: 3px;
-        }
-
         .info-profile-section {
             padding: 6px 14px;
         }
@@ -460,7 +436,6 @@
         }
 
         .card-saluran .action-icon { color: #ffffff; }
-        .card-admin .action-icon { color: #0A84FF; }
 
         .action-text {
             display: flex;
@@ -708,191 +683,6 @@
             opacity: 1;
         }
 
-        .content-box {
-            margin: 14px;
-            padding: 18px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-        }
-
-        .content-box h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cart-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-        }
-
-        .cart-item img {
-            width: 48px;
-            height: 48px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .cart-item-details {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .cart-item-price {
-            font-size: 0.75rem;
-            color: var(--accent-gold);
-            font-weight: 700;
-        }
-
-        .btn-remove-cart {
-            background: rgba(255, 69, 58, 0.1);
-            border: 1px solid rgba(255, 69, 58, 0.2);
-            color: var(--danger);
-            border-radius: 8px;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-
-        .cart-checkout-btn {
-            display: none;
-            width: 100%;
-            padding: 12px;
-            background: var(--text-primary);
-            color: #000;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.8rem;
-            border-radius: 12px;
-            margin-top: 18px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .voucher-card {
-            display: flex;
-            align-items: center;
-            background: rgba(197, 160, 89, 0.05);
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 16px;
-            border: 1px solid var(--border-gold);
-        }
-
-        .vc-icon-wrapper {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            background: rgba(197, 160, 89, 0.15);
-            border: 1px solid var(--border-gold);
-        }
-
-        .vc-icon-wrapper i {
-            color: var(--accent-gold);
-            font-size: 1rem;
-        }
-
-        .vc-info {
-            flex: 1;
-        }
-
-        .vc-title {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-
-        .vc-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent-gold);
-        }
-
-        .voucher-search-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .voucher-search-bar input {
-            flex: 1;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-subtle);
-            border-radius: 10px;
-            padding: 10px 12px;
-            color: #fff;
-            font-size: 0.8rem;
-            outline: none;
-        }
-
-        .btn-voucher-search {
-            background: var(--text-primary);
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            width: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .voucher-message {
-            font-size: 0.75rem;
-            margin-top: 6px;
-            font-weight: 500;
-            min-height: 18px;
-        }
-
-        .share-api-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 12px;
-            background: rgba(48, 209, 88, 0.1);
-            border: 1px solid rgba(48, 209, 88, 0.2);
-            color: #30D158;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.82rem;
-            border-radius: 12px;
-        }
-
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -994,19 +784,6 @@
             color: var(--text-secondary);
             font-size: 1.2rem;
             cursor: pointer;
-        }
-        .modal-box.shake-x,
-        .event-box.shake-x {
-            animation: modalShakeX 0.4s ease;
-        }
-        @keyframes modalShakeX {
-            0%, 100% { transform: translateX(0); }
-            15% { transform: translateX(-10px); }
-            30% { transform: translateX(9px); }
-            45% { transform: translateX(-7px); }
-            60% { transform: translateX(5px); }
-            75% { transform: translateX(-3px); }
-            90% { transform: translateX(2px); }
         }
         .modal-input {
             width: 100%;
@@ -1116,6 +893,15 @@
             justify-content: center;
             gap: 8px;
         }
+        .react-share-opt summary {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .react-share-opt details p {
+            margin-top: 10px;
+        }
         select.modal-input {
             appearance: none;
             -webkit-appearance: none;
@@ -1190,12 +976,6 @@
             height: 100%;
             pointer-events: none;
             filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
-        }
-        .pz-wrap.shake { animation: pzShake 0.35s ease; }
-        @keyframes pzShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
         }
         .pz-track {
             position: relative;
@@ -1713,7 +1493,7 @@
                 </ul>
                 
                 <div class="dialog-footer">
-                    <button class="btn btn-close" disabled="" onclick="return false;">Close</button>
+                    <button class="btn btn-close" disabled="">Close</button>
                     <a href="https://whatsapp.com/channel/0029Vb6t3YqIXnluSByJvh1g" target="_blank" class="btn btn-join" onclick="handleJoin()">Join Now</a>
                 </div>
             </div>
@@ -1839,7 +1619,7 @@
             <div class="search-section">
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari layanan / produk..." class="">
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari layanan / produk...">
                 </div>
             </div>
 
@@ -1886,6 +1666,30 @@
                     </div>
                     <span class="tool-title">Share Web Gw</span>
                     <span class="tool-desc">Bagikan fitur ini</span>
+                </div>
+                
+                <div onclick="openTool('pin')" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <i class="fa-brands fa-pinterest"></i>
+                    </div>
+                    <span class="tool-title">Pinterest Downloader</span>
+                    <span class="tool-desc">Download video Pinterest</span>
+                </div>
+                
+                <div onclick="openTool('thumb')" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                    <span class="tool-title">Thumbnail Downloader</span>
+                    <span class="tool-desc">Thumbnail video YouTube</span>
+                </div>
+                
+                <div onclick="openTool('ig')" class="tool-card">
+                    <div class="tool-icon-wrapper">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <span class="tool-title">Instagram Downloader</span>
+                    <span class="tool-desc">Download video & reels IG</span>
                 </div>
             </div>
         </div>
@@ -1979,7 +1783,7 @@
                 </div>
             </div>
             <div class="react-label" style="margin-bottom: 0;">Geser potongan puzzle ke bagian yang kosong</div>
-            <div id="pzWrap" class="pz-wrap">
+            <div class="pz-wrap">
                 <canvas id="pzBg" width="320" height="180"></canvas>
                 <div id="pzPiece" class="pz-piece"><canvas id="pzPieceCv" height="180"></canvas></div>
             </div>
@@ -1988,6 +1792,29 @@
                 <div id="pzHandle" class="pz-handle"><i class="fa-solid fa-arrow-right"></i></div>
             </div>
             <div id="pzMsg" class="react-msg"></div>
+        </div>
+    </div>
+
+    <div id="aboutModal" class="modal-overlay">
+        <div class="modal-box" style="max-height: 92vh; overflow-y: auto;">
+            <div class="modal-header">
+                <span class="modal-title">Tentang Aplikasi</span>
+                <button class="modal-close" onclick="closeAbout()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="react-share-opt">
+                <details>
+                    <summary>Tentang A. Suki</summary>
+                    <p>A. Suki adalah web app yang berisi katalog layanan dan produk digital, ditambah kumpulan tools gratis: downloader YouTube, TikTok, Instagram, Pinterest, thumbnail video, dan terjemahan. Ada juga fitur reaction saluran WhatsApp dan pembuat logo. Bisa dipasang ke layar utama HP tanpa download lewat toko aplikasi. Pantau update lewat Saluran Suki dan Saluran WG.</p>
+                </details>
+            </div>
+            <div class="react-share-opt">
+                <details>
+                    <summary>Kenapa A. Suki ringan?</summary>
+                    <p>A. Suki adalah website yang dibungkus menjadi aplikasi APK. Isi aplikasinya (katalog, tools downloader, dan fitur lain) tidak disimpan di dalam APK, tapi dimuat langsung dari website. Jadi file aplikasinya kecil dan tidak makan banyak penyimpanan HP.</p>
+                    <p>Karena kontennya diambil dari website, setiap ada update fitur atau katalog baru langsung muncul tanpa perlu install ulang APK. Beberapa bagian juga disimpan sementara di perangkat supaya terbuka lebih cepat di pemakaian berikutnya.</p>
+                    <p>Itulah alasan kenapa apk A. Suki ringan.</p>
+                </details>
+            </div>
         </div>
     </div>
 
@@ -2005,16 +1832,16 @@
             <span>Home</span>
         </a>
         <a class="nav-item" onclick="openToolsSite()">
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-            <span>Tools</span>
+            <i class="fa-regular fa-face-smile"></i>
+            <span>Reaction</span>
         </a>
         <a class="nav-item" onclick="openLogoSite()">
             <i class="fa-solid fa-image"></i>
             <span>logo</span>
         </a>
         <a class="nav-item" onclick="switchPage('profilePage', this)">
-            <i class="fa-regular fa-user"></i>
-            <span>Profil</span>
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <span>Tools</span>
         </a>
     </nav>
 
@@ -2050,6 +1877,10 @@
                     <i class="fa-solid fa-users"></i>
                     <span>Grup WGxSuki</span>
                 </a>
+                <a href="#" class="menu-item" onclick="openAbout(event)">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Tentang Aplikasi</span>
+                </a>
             </div>
             <button class="menu-eye-btn" onclick="toggleMenuContent()" aria-label="Sembunyikan / tampilkan menu">
                 <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
@@ -2076,28 +1907,6 @@
                     <i class="fa-brands fa-whatsapp"></i>
                     <span>Share Sekarang</span>
                 </button>
-                <a href="https://t.me/suki7111" target="_blank" class="event-btn event-btn-tele">
-                    <i class="fa-brands fa-telegram"></i>
-                    <span>Telegram</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div id="eventModal" class="event-overlay">
-        <div class="event-box">
-            <button class="event-skip" onclick="shakeClose(this, closeEventModal)" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
-            <a href="Profil admin/vd.mp4" target="_blank" class="event-gameplay">gameplay offline</a>
-            <img src="Profil admin/event.jpg" alt="Event Reaction Saluran WA" class="event-img">
-            <div class="event-actions">
-                <button class="event-btn event-btn-share" onclick="shareEvent()">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <span>Share Sekarang</span>
-                </button>
-                <a href="https://t.me/suki7111" target="_blank" class="event-btn event-btn-tele">
-                    <i class="fa-brands fa-telegram"></i>
-                    <span>Telegram</span>
-                </a>
             </div>
         </div>
     </div>
@@ -2303,6 +2112,12 @@
 
         let currentToolType = '';
 
+        const toolMeta = {
+            pin: ['Pinterest Downloader', 'Tempel URL Pinterest di sini...'],
+            thumb: ['Thumbnail Downloader', 'Tempel URL video YouTube di sini...'],
+            ig: ['Instagram Downloader', 'Tempel URL Instagram di sini...']
+        };
+
         function openTool(type) {
             currentToolType = type;
             const modal = document.getElementById('toolModal');
@@ -2334,6 +2149,12 @@
                 urlInput.style.display = 'none';
                 textInput.style.display = 'block';
                 langSelect.style.display = 'block';
+            } else if (toolMeta[type]) {
+                title.textContent = toolMeta[type][0];
+                urlInput.style.display = 'block';
+                textInput.style.display = 'none';
+                langSelect.style.display = 'none';
+                urlInput.placeholder = toolMeta[type][1];
             }
             modal.classList.add('active');
         }
@@ -2349,6 +2170,20 @@
                 navigator.clipboard.writeText(lastTranslatedText);
                 alert('Teks berhasil disalin!');
             }
+        }
+
+        async function cobaltDownload(url) {
+            try {
+                const res = await fetch('https://api.cobalt.tools/', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+                const data = await res.json();
+                if (data && data.url) return data.url;
+                if (data && data.picker && data.picker[0] && data.picker[0].url) return data.picker[0].url;
+            } catch (e) {}
+            return null;
         }
 
         async function executeTool() {
@@ -2412,6 +2247,47 @@
                     } else {
                         alert('Gagal menerjemahkan teks!');
                     }
+                } else if (currentToolType === 'pin') {
+                    const url = document.getElementById('toolInputUrl').value.trim();
+                    if (!url) throw new Error('Masukkan URL Pinterest terlebih dahulu!');
+                    const downloadUrl = await cobaltDownload(url);
+                    if (downloadUrl) {
+                        resultDiv.innerHTML = `<a href="${downloadUrl}" target="_blank" class="result-btn"><i class="fa-solid fa-download"></i> Download Video Pinterest</a>`;
+                        resultDiv.style.display = 'flex';
+                    } else {
+                        alert('Gagal mengambil video Pinterest. Pastikan link valid!');
+                    }
+                } else if (currentToolType === 'ig') {
+                    const url = document.getElementById('toolInputUrl').value.trim();
+                    if (!url) throw new Error('Masukkan URL Instagram terlebih dahulu!');
+                    let downloadUrl = null;
+                    try {
+                        let res = await fetch('https://api.siputzx.my.id/api/d/igdl?url=' + encodeURIComponent(url));
+                        let data = await res.json();
+                        if (data && data.data && data.data[0] && data.data[0].url) downloadUrl = data.data[0].url;
+                    } catch (e) {}
+                    if (!downloadUrl) downloadUrl = await cobaltDownload(url);
+                    if (downloadUrl) {
+                        resultDiv.innerHTML = `<a href="${downloadUrl}" target="_blank" class="result-btn"><i class="fa-solid fa-download"></i> Download Video Instagram</a>`;
+                        resultDiv.style.display = 'flex';
+                    } else {
+                        alert('Gagal mengambil video Instagram. Pastikan link valid dan akun tidak private!');
+                    }
+                } else if (currentToolType === 'thumb') {
+                    const url = document.getElementById('toolInputUrl').value.trim();
+                    if (!url) throw new Error('Masukkan URL video YouTube terlebih dahulu!');
+                    const idMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/|v\/))([\w-]{11})/);
+                    if (!idMatch) throw new Error('Link video YouTube tidak valid!');
+                    const base = 'https://img.youtube.com/vi/' + idMatch[1] + '/';
+                    const hasMax = await new Promise(resolve => {
+                        const img = new Image();
+                        img.onload = () => resolve(img.naturalWidth > 120);
+                        img.onerror = () => resolve(false);
+                        img.src = base + 'maxresdefault.jpg';
+                    });
+                    const thumbUrl = base + (hasMax ? 'maxresdefault.jpg' : 'hqdefault.jpg');
+                    resultDiv.innerHTML = `<a href="${thumbUrl}" target="_blank" class="result-btn"><i class="fa-solid fa-download"></i> Download Thumbnail</a>`;
+                    resultDiv.style.display = 'flex';
                 }
             } catch (err) {
                 alert(err.message || 'Terjadi kesalahan saat memproses request!');
@@ -2640,10 +2516,6 @@
                 pzSetMsg('ok', 'Verifikasi berhasil!');
                 setTimeout(() => { closePuzzle(); setHumanVerified(); }, 700);
             } else {
-                const wrap = document.getElementById('pzWrap');
-                wrap.classList.remove('shake');
-                void wrap.offsetWidth;
-                wrap.classList.add('shake');
                 pzSetMsg('error', 'Belum pas, coba lagi.');
                 handle.classList.add('back');
                 handle.style.transform = 'translateX(0)';
@@ -2756,6 +2628,15 @@
             if (menuVideo) menuVideo.pause();
         }
 
+        function openAbout(e) {
+            if (e) e.preventDefault();
+            document.getElementById('aboutModal').classList.add('active');
+        }
+
+        function closeAbout() {
+            document.getElementById('aboutModal').classList.remove('active');
+        }
+
         function shareEvent() {
             const eventText = "Mau bot reaction saluran wa gratis? Download apk nya sekarang, terbatas!\nhttps://www.mediafire.com/file/iwnvpu1h1z3gc7j/A.+Suki_1.apk/file";
             window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(eventText), '_blank');
@@ -2770,13 +2651,7 @@
         }
 
         function shakeClose(btn, closeFn) {
-            const box = btn.closest('.modal-box, .event-box');
-            if (!box || box.classList.contains('shake-x')) return;
-            box.classList.add('shake-x');
-            setTimeout(() => {
-                box.classList.remove('shake-x');
-                closeFn();
-            }, 400);
+            closeFn();
         }
     </script>
 
