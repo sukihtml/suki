@@ -181,6 +181,106 @@
 
 <div class="catalog-header">
     <div class="catalog-title-group">
+        <i class="fa-solid fa-users"></i>
+        <h2>Katalog Member</h2>
+    </div>
+</div>
+
+<section class="product-grid" id="memberGrid" style="grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 20px) / 3); overflow-x: auto;">
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+    <div class="product-card skel-card">
+        <div class="skeleton skel-img"></div>
+        <div class="skeleton skel-line"></div>
+        <div class="skeleton skel-line short"></div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.08s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img src="profil member/suki.png" alt="pixai free 20.000coin">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">pixai free 20.000coin</h3>
+            <p class="product-price"></p>
+            <div class="product-actions">
+                <a href="https://pixai.art/referral?refCode=74X3BXMJ&utm_source=referral&ref_entry=direct_link&ref_platform=android_app&share_copy_id=SC-EN-LINK-T6" target="_blank" class="btn-action-buy">Gratis</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.16s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img alt="">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">produk 2</h3>
+            <p class="product-price"></p>
+            <div class="product-actions">
+                <a href="#" class="btn-action-buy"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.24s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img alt="">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">produk 3</h3>
+            <p class="product-price"></p>
+            <div class="product-actions">
+                <a href="#" class="btn-action-buy"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.32s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img alt="">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">produk 4</h3>
+            <p class="product-price"></p>
+            <div class="product-actions">
+                <a href="#" class="btn-action-buy"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card real-product" style="display: none; animation: 0.4s ease 0.4s 1 normal forwards running fadeUp;">
+        <div class="product-img-wrapper">
+            <img alt="">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">produk 5</h3>
+            <p class="product-price"></p>
+            <div class="product-actions">
+                <a href="#" class="btn-action-buy"></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="catalog-header">
+    <div class="catalog-title-group">
         <i class="fa-solid fa-gamepad"></i>
         <h2>Katalog Game</h2>
     </div>
@@ -277,10 +377,10 @@
 <script>
 window.addEventListener('load', function () {
     setTimeout(function () {
-        document.querySelectorAll('#productGrid .skel-card, #eventGrid .skel-card, #gameGrid .skel-card').forEach(function (el) {
+        document.querySelectorAll('#productGrid .skel-card, #memberGrid .skel-card, #eventGrid .skel-card, #gameGrid .skel-card').forEach(function (el) {
             el.style.display = 'none';
         });
-        document.querySelectorAll('#productGrid .real-product, #eventGrid .real-product, #gameGrid .real-product').forEach(function (el) {
+        document.querySelectorAll('#productGrid .real-product, #memberGrid .real-product, #eventGrid .real-product, #gameGrid .real-product').forEach(function (el) {
             el.style.display = 'flex';
         });
     }, 800);
