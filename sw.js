@@ -1,4 +1,4 @@
-const CACHE_NAME = 'suki-store-v4';
+const CACHE_NAME = 'suki-store-v5';
 const ASSETS = [
   '/',
   '/index.html',
@@ -14,10 +14,9 @@ const ASSETS = [
   '/Profil admin/Banner2.jpg',
   '/Profil admin/Banner3.jpg',
   '/Profil admin/Profil Suki.jpg',
-  '/Profil admin/Profil design logo.png',
-  '/Profil admin/Profil webstore.png',
   '/Profil admin/japost.png',
   '/Profil admin/jasa gendong ml.png',
+  '/Profil admin/joki gendong ff cs.rank.png',
   '/Profil admin/produk1.jpg',
   '/Profil admin/produk2.jpg',
   '/Profil admin/produk3.png',
@@ -25,6 +24,7 @@ const ASSETS = [
   '/Profil admin/produk5.jpg',
   '/Profil admin/produk6.png',
   '/Profil admin/suki.jpg',
+  '/profil member/suki.png',
   '/Profil game/Suki plane 2.jpg',
   '/Profil game/Tictactoe pro.jpg',
   '/Profil game/balap suki.jpg',
@@ -55,7 +55,16 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET' || !e.request.url.startsWith(self.location.origin)) return;
   e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+    fetch(e.request)
+      .then((res) => {
+        if (res && res.ok && res.status === 200) {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, copy));
+        }
+        return res;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
